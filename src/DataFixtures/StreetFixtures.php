@@ -34,7 +34,7 @@ class StreetFixtures extends Fixture
 
             // Каждая 100-я улица доступна для других fixtures
             if (($i + 1) % 100 == 0) {
-                $this->addReference('street' . ++$refNumber, $street);
+                $this->addReference('street' . $refNumber++, $street);
             }
         }
 

@@ -241,6 +241,42 @@ class Order
      */
     private $payments;
 
+    /**
+     * Добавление услуги
+     *
+     * @param Service $service
+     * @param $quantity
+     * @param $multiplier
+     *
+     * @return Order
+     */
+    public function addService(Service $service, $quantity, $multiplier = 1)
+    {
+        $item = (new OrderItem())
+            ->setService($service)
+            ->setPrice($service->getPrice())
+            ->setMultiplier($multiplier)
+            ->setQuantity($quantity);
+
+        return $this->addItem($item);
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function updateServicesCost()
+    {
+        $servicesCost = 0;
+
+        foreach ($this->getItems() as $item) {
+            /** @var OrderItem $item */
+            $servicesCost += $item->getPrice() * $item->getMultiplier();
+        }
+
+        $this->servicesCost = $servicesCost;
+    }
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -541,7 +577,7 @@ class Order
     {
         if (!$this->items->contains($item)) {
             $this->items[] = $item;
-            $item->setOrdr($this);
+            $item->setOrder($this);
         }
 
         return $this;
@@ -552,8 +588,8 @@ class Order
         if ($this->items->contains($item)) {
             $this->items->removeElement($item);
             // set the owning side to null (unless already changed)
-            if ($item->getOrdr() === $this) {
-                $item->setOrdr(null);
+            if ($item->getOrder() === $this) {
+                $item->setOrder(null);
             }
         }
 
