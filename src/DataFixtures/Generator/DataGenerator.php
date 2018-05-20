@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures\Generator;
 
+use Behat\Transliterator\Transliterator;
+
 class DataGenerator
 {
     protected static $phoneCodes = ['25', '29', '33', '44'];
@@ -179,5 +181,20 @@ TEXT;
         }
 
         return $text;
+    }
+
+    /**
+     * @param null|string $name
+     * @return string
+     */
+    public static function generateEmail(?string $name = null): string
+    {
+        if (!$name) {
+            $name = self::getName();
+        }
+
+        $email = Transliterator::transliterate($name);
+        $email .= mt_rand(10, 99) . '@example.com';
+        return $email;
     }
 }
