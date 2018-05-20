@@ -1,0 +1,140 @@
+.header {
+  padding: 10px 0 5px;
+  color: $text-light-color;
+  border-bottom: 1px solid $hr-color;
+  text-align: center;
+  p {
+    font-weight: 600;
+  }
+  .block-1, .block-2 {
+    margin-bottom: 10px;
+  }
+  .logo {
+    display: block;
+    margin: 0 auto 5px;
+    width: 204px;
+    height: 58px;
+    background: url('../images/logo.png') 0 0 no-repeat;
+  }
+  .separator {
+    display: none;
+  }
+  .description {
+    white-space: nowrap;
+    margin-bottom: 0;
+  }
+  .call-me {
+    margin: 10px 0;
+  }
+  @media (min-width: $bp-desktop) {
+    & > .center-container {
+      display: flex;
+      flex-flow: row nowrap;
+    }
+    .block-1, .block-2 {
+      display: flex;
+      align-items: center;
+    }
+    .block-1 {
+      flex-grow: 1;
+      flex-flow: row nowrap;
+    }
+    .block-2 {
+      flex-grow: 0;
+      flex-flow: row-reverse nowrap;
+      padding: 5px 0 0 40px;
+      p {
+        margin-bottom: 0;
+      }
+    }
+    .logo {
+      margin: -18px 0 0;
+    }
+    .separator {
+      display: block;
+      margin: 2px 8px 0;
+      width: 8px;
+      height: 37px;
+      background: url('../images/separator.png') 0 0 no-repeat;
+    }
+    .description {
+      margin: 5px 0 0;
+    }
+    .work-time {
+      order: 3;
+    }
+    .phones {
+      margin: 0 20px;
+      flex-grow: 0;
+      order: 2;
+      span {
+        display: block;
+      }
+    }
+    .social {
+      order: 3;
+    }
+    .call-me {
+      order: 1;
+    }
+  }
+}
+
+.phones {
+  & > span {
+    display: inline-block;
+    margin: 0 10px;
+    white-space: nowrap;
+    &::before {
+      vertical-align: -3px;
+      content: '';
+      display: inline-block;
+      margin-right: 8px;
+      width: 23px;
+      height: 19px;
+      background: url('../images/operators.png') no-repeat;
+    }
+    &.mts::before {
+      background-position: 0 0;
+    }
+    &.velcom::before {
+      vertical-align: -5px;
+      background-position: -23px 0;
+    }
+    &.velcom-viber::before {
+      vertical-align: -11px;
+      width: 62px;
+      height: 32px;
+      background: url('../images/velcom-viber.png') no-repeat;
+    }
+  }
+}
+
+.social {
+  white-space: nowrap;
+  & > a {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin: 0 1px;
+    background: url('../images/social.png') no-repeat;
+    &.social-fb {
+      background-position: 0 0;
+      &:hover {
+        background-position: 0 -32px;
+      }
+    }
+    &.social-vk {
+      background-position: -32px 0;
+      &:hover {
+        background-position: -32px -32px;
+      }
+    }
+    &.social-ig {
+      background-position: -64px 0;
+      &:hover {
+        background-position: -64px -32px;
+      }
+    }
+  }
+}

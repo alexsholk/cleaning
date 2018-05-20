@@ -1,0 +1,124 @@
+.benefits {
+  margin: 40px 0;
+  display: flex;
+  flex-flow: row wrap;
+  .benefit {
+    flex-grow: 1;
+    flex-basis: 300px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    p {
+      font-size: 16px;
+      padding: 10px;
+      color: $accent-color;
+      margin: 0;
+    }
+  }
+  .benefit-icon {
+    margin: 0 15px;
+  }
+  .benefit-icon img {
+    width: 56px;
+  }
+  @media (min-width: $bp-desktop) {
+    flex-wrap: nowrap;
+    margin-left: -10px;
+    margin-right: -10px;
+    .benefit {
+      border: 1px solid $accent-color;
+      margin: 0 10px;
+      padding: 20px 10px 10px;
+      flex-direction: column;
+      p {
+        text-align: center;
+      }
+    }
+    .benefit-icon {
+      margin-bottom: 10px;
+      img {
+        width: 72px;
+      }
+    }
+  }
+}
+
+.benefits-2 {
+  display: flex;
+  margin: 40px -15px;
+  flex-flow: row wrap;
+  .benefit {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 15px 25px;
+    .benefit-icon {
+      margin-right: 20px;
+      padding: 10px;
+      border: 1px solid $input-border-color;
+      border-radius: 50%;
+      background-color: $bg-color;
+    }
+    img {
+      display: block;
+    }
+    h4 {
+      margin: 10px 0;
+      text-align: left;
+      text-transform: none;
+    }
+    @media (min-width: $bp-tablet) {
+      width: 50%;
+    }
+    @media (min-width: $bp-desktop) {
+      width: 33.3333%;
+    }
+  }
+}
+
+.reviews {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0 -15px;
+  .review {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px 20px;
+    padding: 15px 25px 10px;
+    background-color: $form-bg-color;
+    p:first-child {
+      flex-grow: 1;
+    }
+    cite::before {
+      content: '«';
+      font-size: 20px;
+      line-height: 20px;
+    }
+    cite::after {
+      content: '»';
+      font-size: 20px;
+      line-height: 20px;
+    }
+    .author {
+      time {
+        font-size: 12px;
+        float: right;
+      }
+    }
+  }
+  @media (min-width: $bp-desktop) {
+    flex-flow: row wrap;
+    .review {
+      flex-basis: 250px;
+    }
+  }
+}
+
+.add-review-container {
+  text-align: center;
+  @media (min-width: $bp-desktop) {
+    text-align: right;
+  }
+}

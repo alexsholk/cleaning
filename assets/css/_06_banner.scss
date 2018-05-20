@@ -1,0 +1,68 @@
+.promo {
+  background: url('../images/room-lady.jpg') 0 50% no-repeat;
+  .center-container {
+    height: 100%;
+  }
+  .tagline {
+    margin: 0 -20px;
+    padding: 30px 35px 0;
+    font: italic 24px 'Tinos', serif;
+    color: $tagline-color;
+    background-color: $square-bg-color;
+  }
+  .square {
+    margin: 0 -20px;
+    padding: 20px 35px 50px;
+    color: $square-text-color;
+    background-color: $square-bg-color;
+    h1 {
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    ul {
+      font-size: 16px;
+      line-height: 30px;
+      list-style: inside url('../images/marker.png');
+      @media (min-width: $bp-tablet) {
+        font-size: 18px;
+      }
+    }
+    a {
+      position: relative;
+      left: 0;
+      text-decoration: none;
+      color: inherit;
+      padding-right: 24px;
+      background: url('../images/arrow-right.png') right 0 no-repeat;
+      transition: 0.2s;
+      &.grey {
+        color: $square-text-grey;
+      }
+      @media (min-width: $bp-tablet) {
+        background-position: right 2px;
+      }
+      &:hover {
+        left: 10px;
+        text-decoration: underline;
+      }
+    }
+  }
+  @media (min-width: $bp-desktop) {
+    height: 670px;
+    overflow: hidden;
+    background-position: 55% 0;
+    .tagline {
+      font-size: 32px;
+      padding: 20px 35px;
+      background: transparent;
+    }
+    .square {
+      position: absolute;
+      padding: 50px 35px;
+      left: 40px;
+      top: 115px;
+      width: 460px;
+      height: 440px;
+    }
+  }
+}

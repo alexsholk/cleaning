@@ -1,0 +1,554 @@
+label {
+  color: $form-text-color;
+}
+
+@mixin placeholder {
+  font-style: italic;
+  color: $placeholder-color;
+}
+
+::placeholder {
+  @include placeholder;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  @include placeholder;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+  @include placeholder;
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+  @include placeholder;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  @include placeholder;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+input[type="text"], input[type="password"], input[type="tel"], textarea {
+  font: 14px/20px $font-family;
+  color: $form-text-color;
+  border: 1px solid $input-border-color;
+  padding: 5px 10px;
+  height: 40px;
+  border-radius: $border-radius;
+  transition: 0.2s;
+  &:focus {
+    border-color: $accent-color;
+  }
+}
+
+.error {
+  input[type="text"], input[type="password"], input[type="tel"], textarea {
+    border-color: $input-error-border-color !important;
+    color: $input-error-color !important;
+  }
+  .plus, .minus {
+      border-color: $input-error-border-color !important;
+  }
+}
+
+.error-message {
+  color: $input-error-color;
+  margin-bottom: 7px;
+  display: none;
+}
+
+label {
+  @if ($use-labels) {
+    display: inline-block;
+  } @else {
+    display: none;
+  }
+  margin-bottom: 7px;
+  color: $label-color;
+  &.clickable {
+    cursor: pointer;
+  }
+}
+
+textarea {
+  height: auto;
+  resize: none;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+button {
+  font: inherit;
+  font-weight: 600;
+  color: $button-text-color;
+  background-color: $button-bg-color;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border: none;
+  border-radius: $border-radius;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: $button-hover-bg-color;
+  }
+}
+
+.question {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin: 0 7px;
+  vertical-align: -4px;
+  cursor: pointer;
+  background: url('../images/question-icon.png') 0 0 no-repeat;
+  &:hover {
+    background-position: 0 -18px;
+  }
+}
+
+.order-form {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 -10px 20px;
+  .form-quarter {
+    padding: 0 10px;
+    margin-bottom: 20px;
+    flex-grow: 1;
+    flex-basis: 250px;
+  }
+  input[type="text"], button {
+    display: block;
+    width: 100%;
+    height: 45px;
+    text-align: center;
+  }
+  .input-wrapper {
+    position: relative;
+    width: 100%;
+    .minus, .plus {
+      position: absolute;
+      width: 40px;
+      height: 100%;
+      background: transparent url('../images/plus-minus.png');
+      color: $form-text-color;
+      cursor: pointer;
+      transition: background-color 0.2s ease-out;
+      &:hover {
+        background-color: #ccc;
+      }
+    }
+    .minus {
+      top: 0;
+      left: 0;
+      border-right: 1px solid $input-border-color;
+      background-position: 0 45px;
+      border-radius: $border-radius 0 0 $border-radius;
+      &:hover {
+        background-position: 40px 45px;
+      }
+    }
+    .plus {
+      top: 0;
+      right: 0;
+      border-left: 1px solid $input-border-color;
+      background-position: 0 0;
+      border-radius: 0 $border-radius $border-radius 0;
+      &:hover {
+        background-position: 40px 0;
+      }
+    }
+    .calendar {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40px;
+      height: 100%;
+      background: url('../images/calendar.png') 3px 6px no-repeat;
+      cursor: pointer;
+    }
+  }
+  @media (min-width: $bp-desktop) {
+    margin: 0 0 20px;
+    padding: 25px 20px 10px;
+    background: $form-bg-color url('../images/form-bg.png') 0 0 repeat;
+  }
+}
+
+.popup-form {
+  position: relative;
+  width: 100%;
+  max-width: $popup-form-max-width;
+  form {
+    input[type="text"], input[type="password"], input[type="tel"], textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    textarea {
+      height: 92px;
+    }
+    button {
+      display: block;
+      width: 100%;
+    }
+  }
+  h1, h2, h3, h4 {
+    margin-top: 0;
+  }
+  p {
+    text-align: center;
+  }
+  .button-wrapper {
+    margin-top: 20px;
+    text-align: center;
+  }
+  button {
+    min-width: 40%;
+  }
+}
+
+.services-form form {
+  @media (min-width: $bp-desktop) {
+    display: flex;
+    flex-flow: row nowrap;
+    .block-1 {
+      flex: auto;
+    }
+    .block-2 {
+      width: 320px;
+      margin: 0 0 0 20px;
+    }
+  }
+  .form-row {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    margin: 0 -10px;
+    .input-wrapper {
+      flex-grow: 1;
+      flex-basis: 250px;
+      margin: 0 10px 20px;
+      &.narrow {
+        flex-basis: 150px;
+      }
+    }
+  }
+  input[type="text"], input[type="tel"], button {
+    display: block;
+    width: 100%;
+    height: 45px;
+  }
+  input[type="checkbox"] {
+    margin: 10px 5px 10px 0;
+  }
+  textarea {
+    display: block;
+    width: 100%;
+  }
+}
+
+// Дополнительные услуги
+
+.services {
+  margin: 0 -10px;
+  display: flex;
+  flex-flow: row wrap;
+  .service-outer {
+    width: 50%;
+    padding: 10px;
+    @media (min-width: $bp-narrow) {
+      width: 33.3333%;
+    }
+    @media (min-width: $bp-tablet) {
+      width: 25%;
+    }
+    @media (min-width: $bp-desktop) {
+      width: 33.3333%;
+    }
+    @media (min-width: $bp-wide) {
+      width: 25%;
+    }
+  }
+}
+
+.service {
+  position: relative;
+  padding-top: 20%;
+  padding-bottom: 90px;
+  border: 1px solid $accent-color;
+  cursor: pointer;
+  .selected-border {
+    display: none;
+  }
+  &.selected {
+    .selected-border {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 2px solid $accent-color;
+    }
+  }
+  &.selected.countable {
+    .service-icon {
+      visibility: hidden;
+    }
+    .input-wrapper {
+      display: block;
+    }
+  }
+  .service-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 13%;
+    text-align: center;
+  }
+  .input-wrapper {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 15%;
+    width: 100%;
+    border-color: $accent-color;
+    border-style: solid;
+    border-width: 1px 0;
+    input[type="text"] {
+      width: 100%;
+      height: 35px;
+      border: none;
+      text-align: center;
+      border-radius: 0;
+      cursor: default;
+    }
+    .minus, .plus {
+      position: absolute;
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+      background: $button-bg-color url('../images/plus-minus.png') no-repeat;
+      &:hover {
+        background-color: $button-hover-bg-color;
+      }
+    }
+    .minus {
+      top: 0;
+      left: 0;
+      background-position: -42px -49px;
+    }
+    .plus {
+      top: 0;
+      right: 0;
+      background-position: -42px -4px;
+    }
+  }
+  p {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    min-height: 32px;
+    padding: 0 10px;
+    line-height: 16px;
+    text-align: center;
+  }
+}
+
+// Периодичность услуг
+
+.frequencies {
+  margin: 0 -10px;
+  display: flex;
+  flex-flow: row wrap;
+  .frequency-outer {
+    padding: 10px;
+    width: 50%;
+    @media (min-width: $bp-tablet) {
+      width: 25%;
+    }
+    @media (min-width: $bp-desktop) {
+      width: 50%;
+    }
+    @media (min-width: $bp-wide) {
+      width: 25%;
+    }
+  }
+}
+
+.frequency {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $accent-color;
+  padding: 20px 10px;
+  min-height: 82px;
+  cursor: pointer;
+  position: relative;
+  p {
+    margin: 0;
+    text-align: center;
+    .discount {
+      font-size: 16px;
+      color: $accent-color;
+    }
+  }
+  &.selected {
+    .selected-border {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 2px solid $accent-color;
+    }
+  }
+}
+
+// Калькулятор
+
+.calc {
+  color: $calc-text-color;
+  background-color: $accent-color;
+  padding: 25px;
+  margin: 10px 0 30px;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: $border-radius;
+  h3 {
+    margin: 0 0 5px;
+    color: $calc-text-color;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: left;
+    text-transform: uppercase;
+  }
+  h4 {
+    margin: 5px 0;
+    color: $calc-text-color;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    text-transform: uppercase;
+  }
+  p {
+    margin: 0;
+    & > .right {
+      display: block;
+      float: right;
+    }
+  }
+  hr {
+    margin: 15px 0;
+    height: 1px;
+    background-color: $calc-text-color;
+    border: none;
+  }
+}
+
+// Форма промокода
+
+.promocode {
+  border: 3px solid $accent-color;
+  border-radius: $border-radius;
+  margin: 30px 0;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  label {
+    margin-bottom: 0;
+    color: $accent-color;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .input-wrapper {
+    flex-grow: 1;
+    margin: 0 15px;
+    position: relative;
+    .clear-code {
+      display: none;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      top: 6px;
+      right: 5px;
+      width: 24px;
+      height: 24px;
+      background: url('../images/check-code.png') 0 -48px no-repeat;
+    }
+    &.success {
+      .clear-code {
+        display: block;
+      }
+      input[type="text"] {
+        padding-right: 30px;
+      }
+    }
+  }
+  input[type="text"] {
+    height: 35px !important;
+    font-size: 16px;
+    &[readonly] {
+      background-color: lighten($accent-color, 50%);
+      border-color: lighten($accent-color, 40%);
+    }
+  }
+  .check-code {
+    flex-shrink: 0;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border: 3px solid $accent-color;
+    border-radius: 50%;
+    background: url('../images/check-code.png') 0 0 no-repeat;
+    background-origin: padding-box;
+    &.loading {
+      animation-name: spin;
+      animation-duration: 1000ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      border-right-color: transparent;
+      background: transparent;
+    }
+    &.success {
+      background-position: 0 -24px;
+      cursor: default;
+    }
+  }
+}
+
+// Скидки и акции
+
+.offers {
+  margin: 30px 0 0;
+  .discount-icon {
+    display: block;
+    float: right;
+    margin-top: -6px;
+    width: 30px;
+    height: 30px;
+    background: url('../images/discount.png') 0 0 no-repeat;
+  }
+  h4 {
+    text-align: left;
+  }
+}

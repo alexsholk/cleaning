@@ -1,0 +1,105 @@
+.footer {
+  padding: 20px 0 0;
+  color: $footer-text-color;
+  background: $footer-bg-color url('../images/footer-bg.jpg') 50% 100% repeat;
+  .block-1, .block-2 {
+    margin-bottom: 20px;
+  }
+  .block-1 ul {
+    list-style: none;
+    text-align: center;
+    li {
+      display: inline-block;
+      margin: 0 10px 5px;
+    }
+    a {
+      color: $footer-text-color;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  p {
+    margin: 10px 0;
+  }
+  .phones {
+    text-align: center;
+  }
+  .social {
+    text-align: center;
+  }
+  .developer {
+    width: 100%;
+    font-size: 13px;
+    text-align: center;
+    flex-shrink: 0;
+    margin: 0;
+    a {
+      color: $footer-text-color;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    &::after {
+      content: '';
+      display: inline-block;
+      vertical-align: -8px;
+      width: 24px;
+      height: 24px;
+      margin-left: 4px;
+      background: url('../images/dev.png') 0 0 no-repeat;
+    }
+  }
+  @media (min-width: $bp-desktop) {
+    & > .center-container {
+      display: flex;
+      flex-flow: row nowrap;
+    }
+    .block-1, .block-2 {
+      display: flex;
+      align-items: center;
+    }
+    .block-1 {
+      flex-grow: 1;
+    }
+    .block-2 {
+      flex-grow: 1;
+      flex-flow: row-reverse wrap;
+      .info {
+        text-align: right;
+      }
+    }
+    .logo {
+      display: block;
+      margin: -18px 40px 0 0;
+      width: 204px;
+      height: 58px;
+      background: url('../images/logo-white.png') 0 0 no-repeat;
+    }
+    .separator {
+      display: block;
+      margin: 2px 8px 0;
+      width: 8px;
+      height: 37px;
+      background: url('../images/separator-white.png') 0 0 no-repeat;
+    }
+    .description {
+      white-space: nowrap;
+      margin: 5px 0 0;
+      font-weight: 600;
+    }
+    .developer {
+      text-align: right;
+    }
+    .block-1 ul {
+      text-align: left;
+      list-style: inside disc;
+      li {
+        display: list-item;
+        margin: 0;
+      }
+    }
+  }
+}

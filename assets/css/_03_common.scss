@@ -1,0 +1,38 @@
+*:focus {
+  outline: none;
+}
+
+hr {
+  margin: 20px 0;
+  height: 1px;
+  border: none;
+  background-color: $hr-color;
+}
+
+// Text align
+
+.align-center {
+  text-align: center !important;
+}
+
+.align-left {
+  text-align: left !important;
+}
+
+.align-right {
+  text-align: right !important;
+}
+
+// Visibility
+
+.hidden {
+  opacity: 0;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.display-none {
+  display: none;
+}

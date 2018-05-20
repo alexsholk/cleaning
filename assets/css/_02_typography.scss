@@ -1,0 +1,60 @@
+h1 {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: left;
+  @media (min-width: $bp-tablet) {
+    font-size: 48px;
+  }
+}
+
+h2 {
+  margin: 20px 0;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: $accent-color;
+  text-align: center;
+  text-transform: uppercase;
+  @media (min-width: $bp-tablet) {
+    font-size: 24px;
+    &::before, &::after {
+      content: '';
+      display: inline-block;
+      width: 70px;
+      height: 3px;
+      background-color: $accent-color;
+      margin: 7px 20px;
+      vertical-align: baseline;
+    }
+  }
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 20px 0;
+  text-align: center;
+  color: $text-color;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 10px 0 20px;
+  text-align: center;
+  color: $text-color;
+  text-transform: uppercase;
+}
+
+p {
+  margin: 0 0 10px;
+}
+
+a {
+  color: $link-color;
+  text-decoration: underline;
+  &:hover, &:active {
+    color: $link-hover-color;
+  }
+}
