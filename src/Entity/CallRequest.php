@@ -12,6 +12,27 @@ use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumbe
  */
 class CallRequest
 {
+    // Статусы обработки запроса
+    const STATUS_NEW = 0;
+    const STATUS_PHONED = 1;
+    const STATUS_NOT_AVAILABLE = 2;
+    const STATUS_WRONG_PHONE = 3;
+    const STATUS_SPAM = 4;
+
+    const STATUS_CODE_NEW = 'status.new';
+    const STATUS_CODE_PHONED = 'status.phoned';
+    const STATUS_CODE_NOT_AVAILABLE = 'status.not_available';
+    const STATUS_CODE_WRONG_PHONE = 'status.wrong_phone';
+    const STATUS_CODE_SPAM = 'status.spam';
+
+    public static $statuses = [
+        self::STATUS_NEW => self::STATUS_CODE_NEW,
+        self::STATUS_PHONED => self::STATUS_CODE_PHONED,
+        self::STATUS_NOT_AVAILABLE => self::STATUS_CODE_NOT_AVAILABLE,
+        self::STATUS_WRONG_PHONE => self::STATUS_CODE_WRONG_PHONE,
+        self::STATUS_SPAM => self::STATUS_CODE_SPAM,
+    ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -42,6 +63,18 @@ class CallRequest
      * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
+
+    /**
+     * @ORM\Column(type="smallint")
+     * @Assert\Choice({
+     *      CallRequest::STATUS_NEW,
+     *	    CallRequest::STATUS_PHONED,
+     *	    CallRequest::STATUS_NOT_AVAILABLE,
+     *	    CallRequest::STATUS_WRONG_PHONE,
+     *	    CallRequest::STATUS_SPAM
+     * })
+     */
+    private $status = self::STATUS_NEW;
 
     public function getId(): ?int
     {
@@ -92,6 +125,18 @@ class CallRequest
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(int $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
