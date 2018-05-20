@@ -236,10 +236,16 @@ class Order
      */
     private $cleaners;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Payment", mappedBy="order")
+     */
+    private $payments;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
         $this->cleaners = new ArrayCollection();
+        $this->payments = new ArrayCollection();
     }
 
     public function getId()
@@ -575,6 +581,37 @@ class Order
     {
         if ($this->cleaners->contains($cleaner)) {
             $this->cleaners->removeElement($cleaner);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Payment[]
+     */
+    public function getPayments(): Collection
+    {
+        return $this->payments;
+    }
+
+    public function addPayment(Payment $payment): self
+    {
+        if (!$this->payments->contains($payment)) {
+            $this->payments[] = $payment;
+            $payment->setOrdr($this);
+        }
+
+        return $this;
+    }
+
+    public function removePayment(Payment $payment): self
+    {
+        if ($this->payments->contains($payment)) {
+            $this->payments->removeElement($payment);
+            // set the owning side to null (unless already changed)
+            if ($payment->getOrdr() === $this) {
+                $payment->setOrdr(null);
+            }
         }
 
         return $this;
