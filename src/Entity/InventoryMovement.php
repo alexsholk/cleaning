@@ -48,8 +48,8 @@ class InventoryMovement
     private $cleaner;
 
     /**
-     * @ORM\Column(type="decimal", precision=6, scale=2)
-     * @Assert\Range(min=-9999.99, max=9999.99)
+     * @ORM\Column(type="decimal", precision=8, scale=2)
+     * @Assert\Range(min=0, max=999999.99)
      */
     private $quantity;
 

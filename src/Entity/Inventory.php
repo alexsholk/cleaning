@@ -33,6 +33,7 @@ class Inventory
 
     /**
      * @ORM\Column(type="decimal", precision=6, scale=2)
+     * @Assert\Range(min=0, max=9999.99)
      */
     private $step;
 

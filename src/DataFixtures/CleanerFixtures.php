@@ -10,6 +10,8 @@ use libphonenumber\PhoneNumberUtil;
 
 class CleanerFixtures extends Fixture
 {
+    const COUNT = 5;
+
     protected $phoneUtil;
 
     public function __construct(PhoneNumberUtil $phoneUtil)
@@ -19,14 +21,14 @@ class CleanerFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < self::COUNT; $i++) {
             $cleaner = new Cleaner();
             $cleaner
                 ->setName(DataGenerator::getFemaleName())
                 ->setPhone($this->phoneUtil->parse(DataGenerator::generatePhone()))
                 ->setAdditionalPhone($this->phoneUtil->parse(DataGenerator::generatePhone()));
 
-            $this->addReference('cleaner' . ($i + 1), $cleaner);
+            $this->addReference('cleaner' . $i, $cleaner);
             $manager->persist($cleaner);
         }
 
