@@ -117,8 +117,8 @@ HTML
             ->setCode('BLOCK_MAIN_TEXT_1')
             ->setType(Param::TYPE_HTML)
             ->setValue(
-                '<h3>Клининговая компания “Уборочка” в Минске</h3>' .
-                DataGenerator::generateText(10, true)
+                '<h3>Клининговая компания “Уборочка” в Минске</h3><p>' .
+                DataGenerator::generateText(25) . '</p>'
             );
 
         $params[] = (new Param())
@@ -127,8 +127,8 @@ HTML
             ->setCode('BLOCK_MAIN_TEXT_2')
             ->setType(Param::TYPE_HTML)
             ->setValue(
-                '<h3>Почему выбирают нас</h3>' .
-                DataGenerator::generateText(10, true)
+                '<h3>Почему выбирают нас</h3><p>' .
+                DataGenerator::generateText(25) . '</p>'
             );
 
         $params[] = (new Param())

@@ -170,10 +170,11 @@ TEXT;
     public static function generateText(int $sentencesCount, $html = false): string
     {
         $text = '';
-        $sentences = mb_split('.', self::$sampleText);
+        $sentences = preg_split('/(?<=[.?!])\s+(?=[a-z])/i', self::$sampleText);
 
         for ($i = 0; $i < $sentencesCount; $i++) {
-            $sentence = $sentences[mt_rand(0, count($sentences) - 1)] . '.';
+            $sentence = $sentences[mt_rand(0, count($sentences) - 1)];
+
             if ($html) {
                 $sentence = '<p>' . $sentence . '</p>';
             }
