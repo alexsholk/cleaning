@@ -23,5 +23,6 @@ yarn-error.log
 
 /.idea
 /_
-/public/uploads
+/public/uploads/*
+!/public/uploads/.gitignore
 /streets.yml

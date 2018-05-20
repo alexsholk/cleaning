@@ -118,4 +118,9 @@ class Session
 
         return $this;
     }
+
+    public function getSessData()
+    {
+        return $this->sessData;
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -11,6 +12,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity("title")
  * @UniqueEntity("code")
  * @UniqueEntity("shortCode")
+ * @Gedmo\Uploadable(
+ *     path="/public/uploads/services",
+ *     allowOverwrite=true,
+ *     filenameGenerator="ALPHANUMERIC",
+ *     maxSize="204800",
+ *     allowedTypes="image/png"
+ * )
  */
 class Service
 {
@@ -51,19 +59,19 @@ class Service
     private $countable;
 
     /**
-     * @ORM\Column(type="decimal", precision=4, scale=1)
-     * @Assert\Range(min=1, max=999.9)
+     * @ORM\Column(type="decimal", precision=4, scale=1, nullable=true)
+     * @Assert\Range(max=999.9)
      */
-    private $minCount;
+    private $minCount = 1;
 
     /**
-     * @ORM\Column(type="decimal", precision=4, scale=1)
-     * @Assert\Range(min=1, max=999.9)
+     * @ORM\Column(type="decimal", precision=4, scale=1, nullable=true)
+     * @Assert\Range(max=999.9)
      */
     private $maxCount;
 
     /**
-     * @ORM\Column(type="decimal", precision=3, scale=1)
+     * @ORM\Column(type="decimal", precision=3, scale=1, nullable=true)
      * @Assert\Range(min=0.1, max=99.9)
      */
     private $step;
@@ -81,6 +89,7 @@ class Service
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Gedmo\UploadableFileName()
      */
     private $icon;
 
@@ -238,4 +247,5 @@ class Service
 
         return $this;
     }
+
 }

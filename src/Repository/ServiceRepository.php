@@ -14,37 +14,75 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ServiceRepository extends ServiceEntityRepository
 {
+    const SERVICE_ROOM = 'ROOM';
+    const SERVICE_BATHROOM = 'BATHROOM';
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Service::class);
     }
 
-//    /**
-//     * @return Service[] Returns an array of Service objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Базовые услуги - уборка комнаты и санузла
+     *
+     * @return array
+     */
+    public function getBasicServices()
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->findBy([
+            'code'      => [self::SERVICE_ROOM, self::SERVICE_BATHROOM],
+            'available' => true,
+        ], [
+            'position' => 'ASC',
+        ]);
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Service
+    /**
+     * Уборка комнат
+     *
+     * @return null|object
+     */
+    public function getServiceRoom()
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->findOneBy(['code' => self::SERVICE_ROOM, 'available' => true]);
     }
-    */
+
+    /**
+     * Уборка санузла
+     *
+     * @return null|object
+     */
+    public function getServiceBathroom()
+    {
+        return $this->findOneBy(['code' => self::SERVICE_BATHROOM, 'available' => true]);
+    }
+
+    /**
+     * Дополнительные услуги
+     *
+     * @return array
+     */
+    public function getAdditionalServices()
+    {
+        return $this->findBy([
+            'code'      => null,
+            'available' => true,
+        ], [
+            'position' => 'ASC',
+        ]);
+    }
+
+    /**
+     * Услуга
+     *
+     * @param $id
+     * @return null|object
+     */
+    public function getAvailableById($id)
+    {
+        return $this->findOneBy([
+            'id'        => $id,
+            'available' => true,
+        ]);
+    }
 }
