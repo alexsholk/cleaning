@@ -1,0 +1,14 @@
+<div id="promocode-block" class="promocode" data-discount="{{ promocode ? promocode.discount : 0 }}"
+     data-check-url="{{ path('check_promocode') }}"
+     data-clear-url="{{ path('clear_promocode') }}">
+    <label>Промокод</label>
+    {% set hasErrors = form.promocode.vars.errors|length > 0 %}
+    <div class="input-wrapper{{ promocode ? ' success' : '' }}{{ hasErrors ? ' error' : '' }}"
+         data-toggle="tooltip" data-html="true" data-trigger="manual"
+         title="{{ form_errors(form.promocode)|e }}">
+        {{ form_widget(form.promocode, {'attr': {'maxlength': 20, 'readonly': promocode ? true : false }}) }}
+        {{ form_widget(form.clear, {'label': false, 'attr': {'class': 'clear-code', 'data-toggle': 'tooltip', 'title': 'Отменить'}}) }}
+    </div>
+    {% set btnClass = 'check-code' ~ (promocode ? ' success' : '') %}
+    {{ form_widget(form.check, {'label': false, 'attr': {'class': btnClass}}) }}
+</div>

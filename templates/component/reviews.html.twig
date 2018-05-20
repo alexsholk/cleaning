@@ -1,0 +1,54 @@
+<div class="reviews-container">
+    <h2>Отзывы</h2>
+    {% if reviews|length %}
+        <div class="reviews">
+            {% for review in reviews %}
+                <div class="review">
+                    <p><cite>{{ review.text }}</cite></p>
+                    <p class="author">
+                        {{ review.name }}
+                        <time datetime="{{ review.createdAt|date('Y-m-d') }}">{{ review.createdAt|date('d.m.Y') }}</time>
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if reviewForm is not empty %}
+        <div class="add-review-container">
+            <button class="add-review" data-fancybox data-src="#review-form-container">Оставить отзыв</button>
+        </div>
+        {# Popup form #}
+        <div id="review-form-container" class="popup-form display-none">
+            {{ form_start(reviewForm, {'action': path('add_review'), 'method': 'post', 'attr': {'id': 'review-form'}}) }}
+            <div class="error-message review-error"></div>
+            <div class="input-wrapper">
+                <div class="error-message name-error"></div>
+                {{ form_widget(reviewForm.name, {'attr': {'placeholder': 'Имя', 'autocomplete': 'off'}}) }}
+            </div>
+            <div class="input-wrapper">
+                <div class="error-message text-error"></div>
+                {{ form_widget(reviewForm.text, {'attr': {'placeholder': 'Текст'}}) }}
+            </div>
+            <div class="input-wrapper">
+                {{ form_widget(reviewForm.submit, {'label': 'Оставить отзыв'}) }}
+            </div>
+            {{ form_end(reviewForm) }}
+            <noindex>
+                <div id="review-success-message" class="display-none">
+                    {{ params.get('REVIEW_ADD_SUCCESS_MESSAGE')|raw }}
+                    <div class="button-wrapper">
+                        <button class="close-popup">ОК</button>
+                    </div>
+                </div>
+                <div id="review-error-message" class="display-none">
+                    {{ params.get('REVIEW_ADD_ERROR_MESSAGE')|raw }}
+                    <div class="button-wrapper">
+                        <button class="close-popup">ОК</button>
+                    </div>
+                </div>
+            </noindex>
+            {% include '_partials/_loader.html.twig' %}
+        </div>
+    {% endif %}
+</div><!-- reviews-container -->

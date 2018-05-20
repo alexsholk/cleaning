@@ -19,32 +19,41 @@ class StreetRepository extends ServiceEntityRepository
         parent::__construct($registry, Street::class);
     }
 
-//    /**
-//     * @return Street[] Returns an array of Street objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Поиск улиц по названию
+     *
+     * @param $query
+     * @param $limit
+     *
+     * @return array
+     */
+    public function searchStreet($query = '', $limit = null)
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+        $result = $this->createQueryBuilder('s')
+            ->select('s.title')
+            ->where('s.title LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            ->orderBy('s.title', 'ASC')
+            ->setMaxResults($limit)
             ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+            ->getArrayResult();
 
-    /*
-    public function findOneBySomeField($value): ?Street
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return array_column($result, 'title');
     }
-    */
+
+    /**
+     * Список улиц
+     *
+     * @return array
+     */
+    public function getStreetList()
+    {
+        $result = $this->createQueryBuilder('s')
+            ->select('s.title')
+            ->orderBy('s.title', 'ASC')
+            ->getQuery()
+            ->getArrayResult();
+
+        return array_column($result, 'title');
+    }
 }

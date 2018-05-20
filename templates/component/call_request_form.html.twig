@@ -1,0 +1,32 @@
+{# Popup form #}
+<div id="call-request-form-container" class="popup-form display-none">
+    {{ form_start(callRequestForm, {'action': path('call_request'), 'method': 'post', 'attr': {'id': 'call-request-form'}}) }}
+        <div class="error-message call_request-error"></div>
+        <div class="input-wrapper">
+            <div class="error-message name-error"></div>
+            {{ form_widget(callRequestForm.name, {'attr': {'placeholder': 'Имя', 'autocomplete': 'off'}}) }}
+        </div>
+        <div class="input-wrapper">
+            <div class="error-message phone-error"></div>
+            {{ form_widget(callRequestForm.phone, {'attr': {'placeholder': 'Телефон', 'autocomplete': 'off'}}) }}
+        </div>
+        <div class="input-wrapper">
+            {{ form_widget(callRequestForm.submit, {'label': 'Заказать звонок'}) }}
+        </div>
+    {{ form_end(callRequestForm) }}
+    <noindex>
+        <div id="call-request-success-message" class="display-none">
+            {{ params.get('CALL_REQUEST_ADD_SUCCESS_MESSAGE')|raw }}
+            <div class="button-wrapper">
+                <button class="close-popup">ОК</button>
+            </div>
+        </div>
+        <div id="call-request-error-message" class="display-none">
+            {{ params.get('CALL_REQUEST_ADD_ERROR_MESSAGE')|raw }}
+            <div class="button-wrapper">
+                <button class="close-popup">ОК</button>
+            </div>
+        </div>
+    </noindex>
+    {% include '_partials/_loader.html.twig' %}
+</div>

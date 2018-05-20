@@ -1,0 +1,43 @@
+<div id="calc" class="calc" data-base-cost="{{ params.get('ORDER_BASE_COST') }}">
+    <h3>Уборка квартиры</h3>
+    <p>
+        с
+        <strong id="count-room" data-price="{{ serviceRoom.price }}" data-count="{{ countRoom }}">
+            {{ countRoom ~ ' ' ~ pluralize(countRoom, ['жилой', 'жилыми', 'жилыми'], 'ru') }}
+        </strong>
+        и
+        <strong id="count-bathroom" data-price="{{ serviceBathroom.price }}" data-count="{{ countBathroom }}">
+            {{ countBathroom ~ ' ' ~ pluralize(countBathroom, ['ванной', 'ванными', 'ванными'], 'ru') }}
+        </strong>
+        комнатами, кухня, коридор
+    </p>
+    <hr>
+    <p>Дата уборки <span class="right">{{ datetime|date('d.m.Y H:i') }}</span></p>
+    <hr>
+    <div id="additional-services" class="display-none">
+        <h4>Дополнительные услуги</h4>
+        {% for service in services %}
+            <p class="display-none" data-id="{{ service.id }}" data-price="{{ service.price }}">
+                {{ service.title }}
+                {% if service.countable %}
+                    <span class="count"></span>
+                {% endif %}
+                <span class="right"><span class="price"></span>&nbsp;р</span>
+            </p>
+        {% endfor %}
+        <hr>
+    </div>
+    <p><strong>Стандартная стоимость</strong> <span class="right"><span id="price-standard"></span>&nbsp;р</span></p>
+    <hr>
+    <div id="discount-block" class="display-none">
+        <h4>Скидка</h4>
+        <p id="discount-frequency" class="display-none">
+            За регулярность <span class="right"><span class="percent">0</span>&nbsp;%</span>
+        </p>
+        <p id="discount-promocode" class="display-none">
+            По промокоду <span class="right"><span class="percent">0</span>&nbsp;%</span>
+        </p>
+        <hr>
+    </div>
+    <p><strong>К ОПЛАТЕ</strong> <span class="right"><span id="price-total"></span>&nbsp;р</span></p>
+</div>

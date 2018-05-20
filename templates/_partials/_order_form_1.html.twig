@@ -1,0 +1,32 @@
+{{ form_start(form, {'action': path('homepage'), 'method': 'post', 'attr' : {'id': 'order-form-1', 'class': 'order-form step-1'}}) }}
+    {% for field in form %}
+        {% if field.vars.name != '_token' %}
+            <div class="form-quarter">
+                {# Дата и время #}
+                {% if field.vars.name == 'datetime' %}
+                    <div class="input-wrapper{{ field.vars.valid ? '' : ' error' }}"
+                         data-toggle="tooltip" data-html="true" data-trigger="manual"
+                         title="{{ form_errors(field)|e }}">
+                        {{ form_widget(field, {'attr': {'class': 'date-input align-left', 'placeholder': 'Выберите дату', 'autocomplete': 'off'}}) }}
+                        <div class="calendar"></div>
+                    </div>
+                    {# Кнопка отправки #}
+                {% elseif field.vars.name == 'submit' %}
+                    <div class="input-wrapper">
+                        {{ form_widget(field, {'label': 'Заказать уборку'}) }}
+                    </div>
+                    {# Услуги #}
+                {% else %}
+                    <div class="input-wrapper{{ field.vars.valid ? '' : ' error' }}"
+                         data-toggle="tooltip" data-html="true" data-trigger="manual"
+                         title="{{ form_errors(field)|e }}">
+                        <input type="text" value="" readonly>
+                        {{ form_widget(field, {'attr': {'class': 'display-none'}}) }}
+                        <div class="minus"></div>
+                        <div class="plus"></div>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endfor %}
+{{ form_end(form) }}

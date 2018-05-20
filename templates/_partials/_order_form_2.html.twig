@@ -1,0 +1,72 @@
+{% import "@App/_partials/_macros.html.twig" as macros %}
+
+{% if services|length %}
+    <h4>Дополнительные услуги</h4>
+    <div class="services">
+        {% for service in services %}
+            {% set field = attribute(form, 'service_' ~ service.id) %}
+            <div class="service-outer">
+                <div class="service{{ field.vars.value ? ' selected' : '' }}{{ service.countable ? ' countable' : '' }}">
+                    <div class="service-icon">
+                        <img src="{{ vich_uploader_asset(service, 'imageFile') }}">
+                    </div>
+                    <p>{{ service.title }}</p>
+                    <div class="selected-border"></div>
+                    <div class="input-wrapper">
+                        {{ form_widget(field, {'attr': {'class': 'display-none', 'data-id': service.id}}) }}
+                        {% if service.countable %}
+                            <input type="text" value="" readonly>
+                            <div class="minus"></div>
+                            <div class="plus"></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<h4>Периодичность услуг</h4>
+<div class="frequencies">
+    {% set translationDomain = form.frequency.vars.choice_translation_domain %}
+    {% for frequency in form.frequency %}
+        {% set discount = params.get('FREQUENCY_DISCOUNT_' ~ frequency.vars.value) ?? 0 %}
+        <div class="frequency-outer">
+            <div class="frequency{{ frequency.vars.checked ? ' selected' : '' }}" data-discount="{{ discount }}">
+                <p>
+                    {{ frequency.vars.label|trans({}, translationDomain) }}
+                    {% if discount %}
+                        <br><span class="discount">&minus;{{ discount }}%</span>
+                    {% endif %}
+                </p>
+                {{ form_widget(frequency, {'attr': {'class': 'display-none'}}) }}
+                <div class="selected-border"></div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<h4>Контактная информация</h4>
+<div class="form-row">
+    {{ macros.wrapped_input('Имя', form.name, {'attr': {'maxlength': 50}}) }}
+    {{ macros.wrapped_input('Телефон', form.phone, {'attr': {'autocomplete': 'off'}}) }}
+</div>
+<h4>Адрес</h4>
+<div class="form-row">
+    {{ macros.wrapped_input('Населенный пункт', form.city, {'attr': {'maxlength': 50, 'data-default': constant('ModelBundle\\Entity\\Order::DEFAULT_CITY')}}) }}
+    {{ macros.wrapped_input('Улица', form.street, {'attr': {'maxlength': 50, 'data-source': path('get_streets')}}) }}
+</div>
+<div class="form-row">
+    {{ macros.wrapped_input('Дом', form.home, {'attr': {'maxlength': 6}}, 'narrow') }}
+    {{ macros.wrapped_input('Корпус', form.building, {'attr': {'maxlength': 6}}, 'narrow') }}
+    {{ macros.wrapped_input('Квартира', form.flat, {'attr': {'maxlength': 6}}, 'narrow') }}
+</div>
+<div class="form-row">
+    {{ macros.wrapped_input('Комментарий к заказу', form.comment, {'attr': {'rows': 3, 'cols': 'auto'}}) }}
+</div>
+<div class="form-row">
+    <div class="input-wrapper">{# intentionally empty #}</div>
+    <div class="input-wrapper">
+        {{ form_widget(form.submit, {'label': 'Заказать уборку'}) }}
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="footer">
+    <div class="center-container">
+        <div class="block-1">
+            <a href="{{ path('homepage') }}" class="logo"></a>
+            {{ params.get('BLOCK_FOOTER_MENU')|raw }}
+        </div>
+        <div class="block-2">
+            <p class="social">
+                <a class="social-fb" href="{{ params.get('LINK_FACEBOOK') }}" target="_blank" title="Facebook"></a>
+                <a class="social-vk" href="{{ params.get('LINK_VK') }}" target="_blank" title="VK"></a>
+                <a class="social-ig" href="{{ params.get('LINK_INSTAGRAM') }}" target="_blank" title="Instagram"></a>
+            </p>
+            <p class="phones">
+                <span class="velcom-viber" title="Velcom и Viber">{{ params.get('PHONE') }}</span>
+            </p>
+            <p class="developer">
+                {# apptodo заменить ссылку на свой сайт #}
+                <a href="https://vk.com/alexsholk" target="_blank">Разработка сайта</a>
+            </p>
+        </div>
+    </div>
+</div>
+

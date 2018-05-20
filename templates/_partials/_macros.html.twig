@@ -1,0 +1,8 @@
+{% macro wrapped_input(label, field, options, class) %}
+    <div class="input-wrapper{{ class ? ' ' ~ class : '' }}{{ field.vars.valid ? '' : ' error' }}"
+         data-toggle="tooltip" data-html="true" data-trigger="manual"
+         title="{{ form_errors(field)|e }}">
+        <label>{{ label }}</label>
+        {{ form_widget(field, options) }}
+    </div>
+{% endmacro %}

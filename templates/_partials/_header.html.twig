@@ -1,0 +1,22 @@
+<div class="header">
+    <div class="center-container">
+        <div class="block-1">
+            <a href="{{ path('homepage') }}" class="logo"></a>
+            <div class="separator"></div>
+            <p class="description">Клининговый сервис</p>
+        </div>
+        <div class="block-2">
+            <p class="phones">
+                <span class="velcom-viber" title="Velcom и Viber">{{ params.get('PHONE') }}</span>
+            </p>
+            <p class="social">
+                <a class="social-fb" href="{{ params.get('LINK_FACEBOOK') }}" target="_blank" title="Facebook"></a>
+                <a class="social-vk" href="{{ params.get('LINK_VK') }}" target="_blank" title="VK"></a>
+                <a class="social-ig" href="{{ params.get('LINK_INSTAGRAM') }}" target="_blank" title="Instagram"></a>
+            </p>
+            <button class="call-me" data-fancybox data-src="#call-request-form-container">Заказать звонок</button>
+        </div>
+    </div>
+</div>
+{# Форма запроса звонка #}
+{{ render(controller("App\\Controller\\ComponentController::callRequestForm")) }}

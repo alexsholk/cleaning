@@ -42,7 +42,7 @@ class DefaultController extends Controller
      * @Route("/order", name="order")
      * @Template("default/order.html.twig")
      */
-    public function orderAction(Request $request)
+    public function order(Request $request)
     {
         return [];
     }

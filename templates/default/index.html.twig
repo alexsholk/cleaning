@@ -1,5 +1,26 @@
 {% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1>Homepage</h1>
+{% block content %}
+    <div class="center-container order-form-container">
+        <h2>Оформление заказа</h2>
+        {% include '_partials/_order_form_1.html.twig' with {'form': form} only %}
+    </div>
+
+    {# Баннер #}
+    {% include '_partials/_banner.html.twig' %}
+
+    <div class="content center-container">
+        <div class="text-content">{{ params.get('BLOCK_MAIN_TEXT_1')|raw }}</div>
+
+        {# Преимущества 1 #}
+        {% include '_partials/_benefits_1.html.twig' %}
+
+        <div class="text-content">{{ params.get('BLOCK_MAIN_TEXT_2')|raw }}</div>
+
+        {# Преимущества 2 #}
+        {% include '_partials/_benefits_2.html.twig' %}
+
+        {# Отзывы #}
+        {{ render(controller("App\\Controller\\ComponentController::reviews")) }}
+    </div>
 {% endblock %}
