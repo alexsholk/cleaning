@@ -29,7 +29,7 @@ class Promocode
     private $discount;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true)
      */
     private $quantity;
 
@@ -46,7 +46,7 @@ class Promocode
     /**
      * @ORM\Column(type="boolean")
      */
-    private $enabled;
+    private $enabled = false;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Order", mappedBy="promocode")
