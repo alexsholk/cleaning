@@ -2,9 +2,9 @@
 
 namespace App\Model;
 
-final class Area
+class AreaModel
 {
-    private static $areas = [
+    protected static $areas = [
         'Заводской',
         'Ленинский',
         'Московский',

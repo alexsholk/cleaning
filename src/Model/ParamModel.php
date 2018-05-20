@@ -4,9 +4,9 @@ namespace App\Model;
 
 use App\Repository\ParamRepository;
 
-final class Param
+class ParamModel
 {
-    private $repository;
+    protected $repository;
 
     public function __construct(ParamRepository $repository)
     {

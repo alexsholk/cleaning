@@ -33,7 +33,7 @@ class ServiceRepository extends ServiceEntityRepository
             'code'      => [self::SERVICE_ROOM, self::SERVICE_BATHROOM],
             'available' => true,
         ], [
-            'position' => 'ASC',
+            'weight' => 'ASC',
         ]);
     }
 
@@ -68,7 +68,7 @@ class ServiceRepository extends ServiceEntityRepository
             'code'      => null,
             'available' => true,
         ], [
-            'position' => 'ASC',
+            'weight' => 'ASC',
         ]);
     }
 

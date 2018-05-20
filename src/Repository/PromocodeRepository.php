@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Promocode;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NoResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,32 +20,63 @@ class PromocodeRepository extends ServiceEntityRepository
         parent::__construct($registry, Promocode::class);
     }
 
-//    /**
-//     * @return Promocode[] Returns an array of Promocode objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Поиск активного промокода по коду
+     *
+     * @param $code
+     * @return mixed|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getActivePromocode($code)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        try {
+            $promocode = $this->createQueryBuilder('p')
+                ->where('p.code = :code')
+                ->andWhere('p.enabled = :enabled')
+                ->andWhere('p.startDate <= :date OR p.startDate IS NULL')
+                ->andWhere('p.endDate > :date OR p.endDate IS NULL')
+                ->setParameter('code', $code)
+                ->setParameter('enabled', true)
+                ->setParameter('date', new \DateTime())
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getSingleResult();
+        } catch (NoResultException $exception) {
+            $promocode = null;
+        }
 
-    /*
-    public function findOneBySomeField($value): ?Promocode
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $promocode;
     }
-    */
+
+    /**
+     * Поиск включенного промокода без учета сроков действия
+     *
+     * @param $code
+     * @return null|object
+     */
+    public function getEnabledPromocode($code)
+    {
+        return $this->findOneBy([
+            'code'    => $code,
+            'enabled' => true,
+        ]);
+    }
+
+    /**
+     * Количество использованных промокодов
+     *
+     * @param $code
+     * @return int
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getActivatedCount($code)
+    {
+        $qb = $this->createQueryBuilder('p');
+        return (int)$qb->select($qb->expr()->count('o.id'))
+            ->join('p.orders', 'o')
+            ->where('p.code = :code')
+            ->setParameter('code', $code)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

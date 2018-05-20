@@ -3,4 +3,4 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
-        params: '@App\Model\Param'
+        params: '@App\Model\ParamModel'

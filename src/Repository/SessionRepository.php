@@ -19,32 +19,24 @@ class SessionRepository extends ServiceEntityRepository
         parent::__construct($registry, Session::class);
     }
 
-//    /**
-//     * @return Session[] Returns an array of Session objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Активные сессии
+     *
+     * @param $excludeId - игнорировать сессии с этими id
+     * @return mixed
+     */
+    public function getActiveSessions($excludeId = null)
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('s')
+            ->where('s.sessTime + s.sessLifetime > :now')
+            ->setParameter('now', time())
+            ->orderBy('s.sessTime', 'DESC');
 
-    /*
-    public function findOneBySomeField($value): ?Session
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        if ($excludeId) {
+            $qb->andWhere('s.sessId NOT IN (:ids)')
+                ->setParameter('ids', (array)$excludeId);
+        }
+
+        return $qb->getQuery()->getResult();
     }
-    */
 }

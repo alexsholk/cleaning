@@ -99,6 +99,16 @@ class Service
      */
     private $shortCode;
 
+    /**
+     * Формы слова единицы измерения
+     *
+     * @return array
+     */
+    public function getUnitForms()
+    {
+        return preg_split('/[^\\w]+/ui', $this->unit);
+    }
+
     public function getId(): ?int
     {
         return $this->id;
