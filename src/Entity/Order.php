@@ -231,9 +231,15 @@ class Order
      */
     private $items;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Cleaner", inversedBy="orders")
+     */
+    private $cleaners;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
+        $this->cleaners = new ArrayCollection();
     }
 
     public function getId()
@@ -543,6 +549,32 @@ class Order
             if ($item->getOrdr() === $this) {
                 $item->setOrdr(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cleaner[]
+     */
+    public function getCleaners(): Collection
+    {
+        return $this->cleaners;
+    }
+
+    public function addCleaner(Cleaner $cleaner): self
+    {
+        if (!$this->cleaners->contains($cleaner)) {
+            $this->cleaners[] = $cleaner;
+        }
+
+        return $this;
+    }
+
+    public function removeCleaner(Cleaner $cleaner): self
+    {
+        if ($this->cleaners->contains($cleaner)) {
+            $this->cleaners->removeElement($cleaner);
         }
 
         return $this;
