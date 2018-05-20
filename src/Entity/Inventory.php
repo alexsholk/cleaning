@@ -31,6 +31,16 @@ class Inventory
      */
     private $inventoryMovements;
 
+    /**
+     * @ORM\Column(type="decimal", precision=6, scale=2)
+     */
+    private $step;
+
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $unit;
+
     public function __construct()
     {
         $this->inventoryMovements = new ArrayCollection();
@@ -80,6 +90,30 @@ class Inventory
                 $inventoryMovement->setInventory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStep()
+    {
+        return $this->step;
+    }
+
+    public function setStep($step): self
+    {
+        $this->step = $step;
+
+        return $this;
+    }
+
+    public function getUnit(): ?string
+    {
+        return $this->unit;
+    }
+
+    public function setUnit(?string $unit): self
+    {
+        $this->unit = $unit;
 
         return $this;
     }
