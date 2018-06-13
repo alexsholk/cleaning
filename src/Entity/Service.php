@@ -82,8 +82,8 @@ class Service
     private $weight;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
-     * @Assert\Length(min=0, max=20)
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Length(min=0, max=100)
      */
     private $unit;
 
