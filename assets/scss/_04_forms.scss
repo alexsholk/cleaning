@@ -216,7 +216,7 @@ button {
     margin-top: 20px;
     text-align: center;
   }
-  button {
+  button:not(.fancybox-close-small) {
     min-width: 40%;
   }
 }

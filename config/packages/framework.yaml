@@ -36,4 +36,4 @@ framework:
         engines: ['twig']
     assets:
         # feature is supported in Symfony 3.3 and higher
-        json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'
+        #json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'
