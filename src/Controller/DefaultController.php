@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Page;
 use App\Entity\Param;
 use App\Entity\Service;
 use App\Form\OrderForm1;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -45,6 +47,26 @@ class DefaultController extends Controller
     public function order(Request $request)
     {
         return [];
+    }
+
+    /**
+     * Текстовая страница
+     *
+     * @Route("/page/{slug}", name="page")
+     * @Template("default/page.html.twig")
+     */
+    public function pageAction($slug)
+    {
+        $repository = $this->get('doctrine')->getRepository(Page::class);
+        $page       = $repository->getPage($slug);
+
+        if (null === $page) {
+            throw new NotFoundHttpException();
+        }
+
+        return [
+            'page' => $page,
+        ];
     }
 
     /**

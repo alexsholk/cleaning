@@ -1,0 +1,18 @@
+{% extends app.request.xmlHttpRequest ? 'ajax_layout.html.twig' : 'layout.html.twig' %}
+
+{% block title %}{{ page.title }}{% endblock %}
+{% block meta_description %}{{ page.description }}{% endblock %}
+{% block meta_keywords %}{{ page.keywords }}{% endblock %}
+
+{% block content %}
+    <div class="center-container">
+        <div class="text-content">
+            <h2>{{ page.title }}</h2>
+            {{ page.content|raw }}
+        </div><!-- text-content -->
+        {% if not app.request.xmlHttpRequest %}
+            <hr>
+            <p><a href="{{ path('homepage') }}" class="no-underline">&larr; Вернуться на главную</a></p>
+        {% endif %}
+    </div>
+{% endblock %}
