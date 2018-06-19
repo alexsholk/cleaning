@@ -3,6 +3,8 @@
 parameters:
     locale: 'ru'
     mailer_user: admin@example.com
+    uploads_dir: '%kernel.project_dir%/public/uploads'
+    uploads_url: '/uploads'
 
 services:
     # default configuration for services in *this* file
@@ -32,3 +34,7 @@ services:
         arguments:
             - '%env(resolve:DATABASE_URL)%'
             - { db_table: session }
+
+    model.naming.file_hash:
+        class: App\Naming\FileHashNamer
+        public: true

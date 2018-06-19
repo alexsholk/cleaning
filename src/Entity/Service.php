@@ -6,19 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ServiceRepository")
  * @UniqueEntity("title")
  * @UniqueEntity("code")
  * @UniqueEntity("shortCode")
- * @Gedmo\Uploadable(
- *     path="/public/uploads/services",
- *     allowOverwrite=true,
- *     filenameGenerator="ALPHANUMERIC",
- *     maxSize="204800",
- *     allowedTypes="image/png"
- * )
+ * @Vich\Uploadable
  */
 class Service
 {
@@ -89,7 +85,6 @@ class Service
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Gedmo\UploadableFileName()
      */
     private $icon;
 
@@ -98,6 +93,47 @@ class Service
      * @Assert\Regex("/^[A-Za-z]{1,3}$/")
      */
     private $shortCode;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $updatedAt;
+
+    /**
+     * Файл изображения
+     *
+     * @Vich\UploadableField(mapping="service_image", fileNameProperty="icon")
+     * @Assert\Image(mimeTypes="image/png", maxSize="200k", minWidth=24, minHeight=24, maxWidth=512, maxHeight=512)
+     */
+    protected $imageFile;
+
+    /**
+     * @param File $image
+     * @return Service
+     */
+    public function setImageFile(File $image = null)
+    {
+        if ($this->imageFile = $image) {
+            $this->setUpdatedAt(new \DateTime());
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
 
     /**
      * Формы слова единицы измерения
@@ -258,4 +294,39 @@ class Service
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdAt
+     * @return Service
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param mixed $updatedAt
+     * @return Service
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
 }
