@@ -6,12 +6,13 @@ use App\Entity\Service;
 use App\Repository\ServiceRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ServiceFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $services   = [];
+        $services = [];
         $services[] = (new Service())
             ->setTitle('Комната')
             ->setShortCode('LR')
@@ -158,5 +159,20 @@ class ServiceFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    protected function copyAndGet($filename)
+    {
+        $imagesDir = realpath(__DIR__ . '/../images/services') . '/';
+        if (!$imagesDir) {
+            throw new \Exception('Image directory not found.');
+        }
+
+        $tempDir = sys_get_temp_dir() . '/';
+        if (!copy($imagesDir . $filename, $tempDir . $filename)) {
+            throw new \Exception('Failed to copy file ' . $imagesDir . $filename);
+        }
+
+        return new UploadedFile($tempDir . $filename, $filename, null, null, null, true);
     }
 }

@@ -1,5 +1,37 @@
 {% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1>Order</h1>
+{% block title %}{{ params.get('SITE_ORDER_TITLE') }}{% endblock %}
+
+{% block content %}
+    <div class="center-container">
+        <h2>Оформление заказа</h2>
+        <div class="services-form">
+            {{ form_start(form, {'action': path('order'), 'method': 'post', 'attr' : {'id': 'order-form-2'}}) }}
+                <div class="block-1">
+                    {% include '_partials/_order_form_2.html.twig' with {'form': form, 'services': services} only %}
+                </div>
+                <div class="block-2">
+                    {% include '_partials/_calculator.html.twig' with {
+                        'services': services,
+                        'serviceRoom': serviceRoom,
+                        'serviceBathroom': serviceBathroom,
+                        'datetime': datetime
+                    } %}
+                    {% include '_partials/_promocode.html.twig' with {'form': form, 'promocode': promocode} only %}
+                    <div class="offers">
+                        <h4>Скидки и акции <span class="discount-icon"></span></h4>
+                        {{ params.get('BLOCK_OFFERS')|raw }}
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+        {% if message %}
+            <div id="order-message" class="popup-form display-none">
+                {{ message|raw }}
+                <div class="button-wrapper">
+                    <button class="close-popup" data-redirect="{{ path('homepage') }}">ОК</button>
+                </div>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}
