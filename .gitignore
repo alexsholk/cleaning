@@ -25,4 +25,4 @@ yarn-error.log
 /_
 /public/uploads/*
 !/public/uploads/.gitignore
-/streets.yml
+#/streets.yml

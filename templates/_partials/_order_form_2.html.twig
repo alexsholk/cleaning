@@ -53,7 +53,7 @@
 </div>
 <h4>Адрес</h4>
 <div class="form-row">
-    {{ macros.wrapped_input('Населенный пункт', form.city, {'attr': {'maxlength': 50, 'data-default': constant('ModelBundle\\Entity\\Order::DEFAULT_CITY')}}) }}
+    {{ macros.wrapped_input('Населенный пункт', form.city, {'attr': {'maxlength': 50, 'data-default': constant('App\\Entity\\Order::DEFAULT_CITY')}}) }}
     {{ macros.wrapped_input('Улица', form.street, {'attr': {'maxlength': 50, 'data-source': path('get_streets')}}) }}
 </div>
 <div class="form-row">

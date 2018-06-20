@@ -2,10 +2,10 @@
     "license": "UNLICENSED",
     "private": true,
     "dependencies": {
-        "fancybox": "https://github.com/fancyapps/fancybox.git#3.2.*",
         "animate.css": "^3.6.1",
         "bootstrap": "^3.3.7",
         "devbridge-autocomplete": "devbridge/jQuery-Autocomplete",
+        "fancybox": "https://github.com/fancyapps/fancybox.git#3.2.*",
         "icheck": "fronteed/icheck",
         "jQuery-viewport-checker": "dirkgroenen/jQuery-viewport-checker",
         "jquery": "^3.3.1",
