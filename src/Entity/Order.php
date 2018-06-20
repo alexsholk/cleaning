@@ -198,13 +198,13 @@ class Order
     private $discountPromocode = 0;
 
     /**
-     * @ORM\Column(type="decimal", precision=6, scale=2)
+     * @ORM\Column(type="decimal", precision=6, scale=2, nullable=true)
      * @Assert\Range(min=0, max=9999.99)
      */
     private $discount;
 
     /**
-     * @ORM\Column(type="decimal", precision=6, scale=2)
+     * @ORM\Column(type="decimal", precision=6, scale=2, nullable=true)
      * @Assert\Range(min=0, max=9999.99)
      */
     private $paid;
@@ -227,7 +227,7 @@ class Order
     private $promocode;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\OrderItem", mappedBy="order", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderItem", mappedBy="order", orphanRemoval=true, cascade={"persist"})
      */
     private $items;
 
