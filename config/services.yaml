@@ -38,3 +38,7 @@ services:
     model.naming.file_hash:
         class: App\Naming\FileHashNamer
         public: true
+
+    App\Twig\Pluralize:
+        public: true
+        tags: ['twig.extension']
