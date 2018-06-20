@@ -10,3 +10,4 @@ vich_uploader:
                 options:        { length: 6 }
             delete_on_update:   true
             delete_on_remove:   true
+            inject_on_load:     true
