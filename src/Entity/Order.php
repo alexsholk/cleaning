@@ -426,7 +426,7 @@ class Order
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus($status): self
     {
         $this->status = $status;
 
@@ -634,7 +634,7 @@ class Order
     {
         if (!$this->payments->contains($payment)) {
             $this->payments[] = $payment;
-            $payment->setOrdr($this);
+            $payment->setOrder($this);
         }
 
         return $this;
@@ -645,11 +645,21 @@ class Order
         if ($this->payments->contains($payment)) {
             $this->payments->removeElement($payment);
             // set the owning side to null (unless already changed)
-            if ($payment->getOrdr() === $this) {
-                $payment->setOrdr(null);
+            if ($payment->setOrder() === $this) {
+                $payment->setOrder(null);
             }
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    public function getStatusName(): ?string
+    {
+        return self::$statuses[$this->status];
     }
 }
