@@ -19,3 +19,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Param, group: Admin }
         public: true
+
+    admin.cleaner:
+        class: App\Admin\CleanerAdmin
+        arguments: [~, App\Entity\Cleaner, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Cleaner, group: Admin }
+        public: true

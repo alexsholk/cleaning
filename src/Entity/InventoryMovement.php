@@ -135,4 +135,9 @@ class InventoryMovement
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return (string)$this->inventory;
+    }
 }
