@@ -55,7 +55,7 @@ class ServiceFixtures extends Fixture
             ->setMinCount(1)
             ->setMaxCount(3)
             ->setStep(1)
-//            ->setImageFile($this->copyAndGet('icon-1.png'))
+            ->setImageFile($this->copyAndGet('icon-1.png'))
         ;
 
         $services[] = (new Service())
@@ -70,7 +70,7 @@ class ServiceFixtures extends Fixture
             ->setMinCount(null)
             ->setMaxCount(null)
             ->setStep(null)
-//            ->setImageFile($this->copyAndGet('icon-2.png'))
+            ->setImageFile($this->copyAndGet('icon-2.png'))
         ;
 
         $services[] = (new Service())
@@ -85,7 +85,7 @@ class ServiceFixtures extends Fixture
             ->setMinCount(null)
             ->setMaxCount(null)
             ->setStep(null)
-//            ->setImageFile($this->copyAndGet('icon-3.png'))
+            ->setImageFile($this->copyAndGet('icon-3.png'))
         ;
 
         $services[] = (new Service())
@@ -100,7 +100,7 @@ class ServiceFixtures extends Fixture
             ->setMinCount(null)
             ->setMaxCount(null)
             ->setStep(null)
-//            ->setImageFile($this->copyAndGet('icon-4.png'))
+            ->setImageFile($this->copyAndGet('icon-4.png'))
         ;
 
         $services[] = (new Service())
@@ -115,7 +115,7 @@ class ServiceFixtures extends Fixture
             ->setMinCount(null)
             ->setMaxCount(null)
             ->setStep(null)
-//            ->setImageFile($this->copyAndGet('icon-5.png'))
+            ->setImageFile($this->copyAndGet('icon-5.png'))
         ;
 
         $services[] = (new Service())
@@ -130,7 +130,7 @@ class ServiceFixtures extends Fixture
             ->setMinCount(1)
             ->setMaxCount(5)
             ->setStep(0.5)
-//            ->setImageFile($this->copyAndGet('icon-6.png'))
+            ->setImageFile($this->copyAndGet('icon-6.png'))
         ;
 
         $services[] = (new Service())
@@ -145,7 +145,7 @@ class ServiceFixtures extends Fixture
             ->setMinCount(1)
             ->setMaxCount(20)
             ->setStep(1)
-//            ->setImageFile($this->copyAndGet('icon-7.png'))
+            ->setImageFile($this->copyAndGet('icon-7.png'))
         ;
 
         $services[] = (new Service())
@@ -160,7 +160,7 @@ class ServiceFixtures extends Fixture
             ->setMinCount(1)
             ->setMaxCount(4)
             ->setStep(1)
-//            ->setImageFile($this->copyAndGet('icon-8.png'))
+            ->setImageFile($this->copyAndGet('icon-8.png'))
         ;
 
         $services[] = (new Service())
@@ -175,7 +175,7 @@ class ServiceFixtures extends Fixture
             ->setMinCount(1)
             ->setMaxCount(10)
             ->setStep(1)
-//            ->setImageFile($this->copyAndGet('icon-9.png'))
+            ->setImageFile($this->copyAndGet('icon-9.png'))
         ;
 
         $services[] = (new Service())
@@ -190,7 +190,7 @@ class ServiceFixtures extends Fixture
             ->setMinCount(null)
             ->setMaxCount(null)
             ->setStep(null)
-//            ->setImageFile($this->copyAndGet('icon-10.png'))
+            ->setImageFile($this->copyAndGet('icon-10.png'))
         ;
 
         foreach ($services as $i => $service) {

@@ -198,13 +198,13 @@ class Order
     private $discountPromocode = 0;
 
     /**
-     * @ORM\Column(type="decimal", precision=6, scale=2)
+     * @ORM\Column(type="decimal", precision=6, scale=2, nullable=true)
      * @Assert\Range(min=0, max=9999.99)
      */
     private $discount;
 
     /**
-     * @ORM\Column(type="decimal", precision=6, scale=2)
+     * @ORM\Column(type="decimal", precision=6, scale=2, nullable=true)
      * @Assert\Range(min=0, max=9999.99)
      */
     private $paid;
@@ -227,7 +227,7 @@ class Order
     private $promocode;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\OrderItem", mappedBy="order", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderItem", mappedBy="order", orphanRemoval=true, cascade={"all"})
      */
     private $items;
 
@@ -426,7 +426,7 @@ class Order
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus($status): self
     {
         $this->status = $status;
 
@@ -634,7 +634,7 @@ class Order
     {
         if (!$this->payments->contains($payment)) {
             $this->payments[] = $payment;
-            $payment->setOrdr($this);
+            $payment->setOrder($this);
         }
 
         return $this;
@@ -645,11 +645,21 @@ class Order
         if ($this->payments->contains($payment)) {
             $this->payments->removeElement($payment);
             // set the owning side to null (unless already changed)
-            if ($payment->getOrdr() === $this) {
-                $payment->setOrdr(null);
+            if ($payment->setOrder() === $this) {
+                $payment->setOrder(null);
             }
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return (string)$this->name;
+    }
+
+    public function getStatusName(): ?string
+    {
+        return self::$statuses[$this->status];
     }
 }
