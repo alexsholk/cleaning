@@ -227,7 +227,7 @@ class Order
     private $promocode;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\OrderItem", mappedBy="order", orphanRemoval=true, cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderItem", mappedBy="order", orphanRemoval=true, cascade={"all"})
      */
     private $items;
 
@@ -655,7 +655,7 @@ class Order
 
     public function __toString()
     {
-        return $this->name;
+        return (string)$this->name;
     }
 
     public function getStatusName(): ?string

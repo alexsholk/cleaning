@@ -1,0 +1,26 @@
+Title: Заголовок
+Site Title: Заголовок сайта
+Visible: Отображать
+Action: Действия
+Page List: Список страниц
+Order: Заказы
+Page: Страницы
+Content: Контент
+Name: Имя
+Status: Статус
+City: Город
+Phone: Телефон
+status.new: Создан
+status.process: В обработке
+status.exec: На исполнении
+status.cancel: Отменен
+Order List: Список заказов
+Datetime: Дата
+Comment: Комментарий
+Address: Адрес
+Street: Улица
+Home: Дом
+Building: Корпус
+Flat: Квартира
+Items: Услуги
+Promocode: Промокод
