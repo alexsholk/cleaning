@@ -24,3 +24,23 @@ Building: Корпус
 Flat: Квартира
 Items: Услуги
 Promocode: Промокод
+Category: Категория
+Type: Тип
+Param List: Список параметров
+Param: Параметры
+type.string: строка
+type.email: электронная почта
+type.url: URL
+type.phone: телефон
+type.text: текст
+type.html: HTML
+type.int: целое число
+type.double: вещественное число
+type.date: дата
+type.time: время
+type.datetime: дата и время
+type.image_url: URL изображения
+group.text_blocks: текстовые блоки
+group.site_settings: настройки сайта
+group.messages: сообщения
+group.order_settings: настройки заказов

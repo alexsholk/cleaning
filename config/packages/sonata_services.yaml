@@ -12,3 +12,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Page, group: Admin }
         public: true
+
+    admin.param:
+        class: App\Admin\ParamAdmin
+        arguments: [~, App\Entity\Param, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Param, group: Admin }
+        public: true

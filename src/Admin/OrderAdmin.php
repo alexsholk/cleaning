@@ -39,17 +39,21 @@ class OrderAdmin extends AbstractAdmin
                     ->add('home')
                     ->add('building')
                     ->add('flat')
-                ->end()
-            ;
+                ->end();
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('status',  'doctrine_orm_string', array(), ChoiceType::class, array(
-                'choices' => array_flip(Order::$statuses),
-                'required' => true,
-            ))
+            ->add(
+                'status',
+                'doctrine_orm_string',
+                [],
+                ChoiceType::class,
+                [
+                    'choices' => array_flip(Order::$statuses)
+                ]
+            )
             ->add('name');
     }
 

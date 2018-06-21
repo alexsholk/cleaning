@@ -18,9 +18,7 @@ class PageAdmin extends AbstractAdmin
             ->add('metaDescription', TextareaType::class)
             ->add('metaKeywords')
             ->add('content', TextareaType::class, ['attr' => ['cols' => '5', 'rows' => '10']])
-            ->add('visible')
-
-        ;
+            ->add('visible');
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -40,5 +38,4 @@ class PageAdmin extends AbstractAdmin
                 ]
             );
     }
-
 }
