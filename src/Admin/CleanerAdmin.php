@@ -26,7 +26,7 @@ class CleanerAdmin extends AbstractAdmin
                 'inventoryMovements',
                 null,
                 [
-                    'by_reference' => false
+                    'by_reference' => false,
                 ]
             )
             ->add('payments');

@@ -26,3 +26,17 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Cleaner, group: Admin }
         public: true
+
+    admin.inventory:
+        class: App\Admin\InventoryAdmin
+        arguments: [~, App\Entity\Inventory, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Inventory, group: Admin }
+        public: true
+
+    admin.promocode:
+        class: App\Admin\PromocodeAdmin
+        arguments: [~, App\Entity\Promocode, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Promocode, group: Admin }
+        public: true
