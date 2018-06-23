@@ -44,8 +44,8 @@ group.text_blocks: текстовые блоки
 group.site_settings: настройки сайта
 group.messages: сообщения
 group.order_settings: настройки заказов
-Cleaner List: Уборщики
-Cleaner: Список уборщиков
+Cleaner List: Список уборщиков
+Cleaner: Уборщики
 Additional Phone: Дополнительный телефон
 Orders: Заказы
 Inventory Movements: Движение инвентаря
@@ -67,3 +67,6 @@ Call Request List: Список запросов на звонок
 CallRequest: Запросы на звонок
 Created At: Дата создания
 Ip: IP
+Payment: Движение средств
+Amount: Сумма
+Payment List: Список движения средств

@@ -31,7 +31,7 @@ class PromocodeAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('code')
-            ->add('startDate')
+            ->add('startDate', null, ['format' => 'd-m-Y H:i'])
             ->add('endDate')
             ->add(
                 '_action',

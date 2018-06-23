@@ -58,7 +58,7 @@ class CallRequestAdmin extends AbstractAdmin
                     'template' => 'sonata\CRUD\ip_list_field.html.twig'
                 ]
                 )
-            ->add('createdAt', null, array('format' => 'd-m-Y H:i'))
+            ->add('createdAt', null, ['format' => 'd-m-Y H:i'])
             ->add(
                 '_action',
                 null,
