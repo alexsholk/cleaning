@@ -70,3 +70,12 @@ Ip: IP
 Payment: Движение средств
 Amount: Сумма
 Payment List: Список движения средств
+Inventory Movement List: Движение инвентаря
+InventoryMovement: Движение инвентаря
+Inventory List: Список инвентаря
+Step: Мера
+Unit: Ед. изм
+type.purchase: Закупка
+type.provide: Выдача
+type.return: Возврат
+type.consumption: Расход

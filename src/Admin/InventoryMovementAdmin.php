@@ -3,6 +3,7 @@
 namespace App\Admin;
 
 
+use App\Entity\InventoryMovement;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -10,28 +11,48 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Sonata\CoreBundle\Form\Type\DateTimeRangePickerType;
 use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class PaymentAdmin  extends AbstractAdmin
+class InventoryMovementAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('amount', NumberType::class)
-            ->add('datetime', DateTimePickerType::class)
-            ->add('order')
+            ->add(
+                'type',
+                ChoiceType::class,
+                [
+                    'choices' => array_flip(InventoryMovement::$types)
+                ]
+            )
+            ->add('inventory')
             ->add('cleaner')
-            ->add('comment', TextareaType::class, ['attr' => ['cols' => '5', 'rows' => '10']]);
+            ->add('quantity', NumberType::class)
+            ->add('datetime', DateTimePickerType::class);
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
+        $translatedTypeItems = array_map(
+            function ($item) {
+                return $this->trans($item);
+            },
+            InventoryMovement::$types
+        );
         $listMapper
-            ->addIdentifier('amount')
-            ->add('order')
+            ->addIdentifier('inventory')
+            ->add(
+                'type',
+                'choice',
+                [
+                    'editable' => true,
+                    'choices' => $translatedTypeItems,
+                ]
+            )
             ->add('cleaner')
-            ->add('datetime', null, ['format' => 'd-m-Y H:i'])
+            ->add('quantity', NumberType::class)
+            ->add('datetime', null,  ['format' => 'd-m-Y H:i'])
             ->add(
                 '_action',
                 null,
@@ -47,17 +68,26 @@ class PaymentAdmin  extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('order')
+            ->add(
+                'type',
+                'doctrine_orm_string',
+                [],
+                ChoiceType::class,
+                [
+                    'choices' => array_flip(InventoryMovement::$types)
+                ]
+            )
+            ->add('inventory')
             ->add('cleaner')
             ->add(
-                'createdAt',
+                'datetime',
                 DateTimeRangeFilter::class,
                 [
                     'field_type' => DateTimeRangePickerType::class,
-                    'field_options' => [
-                        'field_options_start' => [
-                            'format' => 'dd-MM-Y HH:mm',
-                        ],
+                        'field_options' => [
+                            'field_options_start' => [
+                                'format' => 'dd-MM-Y HH:mm',
+                            ],
                         'field_options_end' => [
                             'format' => 'dd-MM-Y HH:mm',
                             'dp_use_current' => true,

@@ -10,12 +10,27 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
+use Sonata\CoreBundle\Form\Type\DateTimeRangePickerType;
+use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class OrderAdmin extends AbstractAdmin
 {
+    public function getFilterParameters()
+    {
+        $this->datagridValues = array_merge(
+            [
+                'status' => [
+                    'value' => 0
+                ],
+            ],
+            $this->datagridValues
+        );
+
+        return parent::getFilterParameters();
+    }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -53,7 +68,26 @@ class OrderAdmin extends AbstractAdmin
                     'choices' => array_flip(Order::$statuses)
                 ]
             )
-            ->add('name');
+            ->add('name')
+            ->add('city')
+            ->add('promocode')
+            ->add(
+                'datetime',
+                DateTimeRangeFilter::class,
+                [
+                    'field_type' => DateTimeRangePickerType::class,
+                    'field_options' => [
+                        'field_options_start' => [
+                            'format' => 'dd-MM-Y HH:mm',
+                        ],
+                        'field_options_end' => [
+                            'format' => 'dd-MM-Y HH:mm',
+                            'dp_use_current' => true,
+                            'dp_show_today' => true,
+                        ]
+                    ]
+                ]
+            );
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -83,6 +117,7 @@ class OrderAdmin extends AbstractAdmin
                     'template' => 'sonata\CRUD\phone_list_field.html.twig'
                 ]
             )
+            ->add('datetime', null,  ['format' => 'd-m-Y H:i'])
             ->add(
                 '_action',
                 null,

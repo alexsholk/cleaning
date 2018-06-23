@@ -4,8 +4,10 @@ namespace App\Admin;
 
 use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 
 class CleanerAdmin extends AbstractAdmin
 {
@@ -21,15 +23,7 @@ class CleanerAdmin extends AbstractAdmin
                 [
                     'by_reference' => false
                 ]
-            )
-            ->add(
-                'inventoryMovements',
-                null,
-                [
-                    'by_reference' => false,
-                ]
-            )
-            ->add('payments');
+            );
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -62,4 +56,9 @@ class CleanerAdmin extends AbstractAdmin
             );
     }
 
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('name');
+    }
 }

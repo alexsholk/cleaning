@@ -34,6 +34,13 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Inventory, group: Admin }
         public: true
 
+    admin.inventory_movement:
+        class: App\Admin\InventoryMovementAdmin
+        arguments: [~, App\Entity\InventoryMovement, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: InventoryMovement, group: Admin }
+        public: true
+
     admin.promocode:
         class: App\Admin\PromocodeAdmin
         arguments: [~, App\Entity\Promocode, ~]
