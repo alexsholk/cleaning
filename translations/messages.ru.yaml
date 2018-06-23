@@ -19,8 +19,78 @@ Datetime: Дата
 Comment: Комментарий
 Address: Адрес
 Street: Улица
+Area: Район
 Home: Дом
 Building: Корпус
 Flat: Квартира
 Items: Услуги
 Promocode: Промокод
+Category: Категория
+Type: Тип
+Param List: Список параметров
+Param: Параметры
+type.string: строка
+type.email: электронная почта
+type.url: URL
+type.phone: телефон
+type.text: текст
+type.html: HTML
+type.int: целое число
+type.double: вещественное число
+type.date: дата
+type.time: время
+type.datetime: дата и время
+type.image_url: URL изображения
+group.text_blocks: текстовые блоки
+group.site_settings: настройки сайта
+group.messages: сообщения
+group.order_settings: настройки заказов
+Cleaner List: Список уборщиков
+Cleaner: Уборщики
+Additional Phone: Дополнительный телефон
+Orders: Заказы
+Inventory Movements: Движение инвентаря
+Payments: Движение средств
+Code: Код
+Discount: Скидка
+Quantity: Количество
+Start Date: Дата начала
+End Date: Дата окончания
+Enabled: Активировать
+Promocode List: Список промокодов
+Promocode Create: Создать промокод
+Inventory: Инвентарь
+status.phoned: Совершен звонок
+status.not_available: Не доступен
+status.wrong_phone: Неправильный номер
+status.spam: Спам
+Call Request List: Список запросов на звонок
+CallRequest: Запросы на звонок
+Created At: Дата создания
+Ip: IP
+Payment: Движение средств
+Amount: Сумма
+Payment List: Список движения средств
+Inventory Movement List: Движение инвентаря
+InventoryMovement: Движение инвентаря
+Inventory List: Список инвентаря
+Step: Мера
+Unit: Ед. изм
+type.purchase: Закупка
+type.provide: Выдача
+type.return: Возврат
+type.consumption: Расход
+Frequency: Частота
+frequency.once: Один раз
+frequency.monthly: Раз в месяц
+frequency.every_two_weeks: Раз в 2 недели
+frequency.weekly: Раз в неделю
+Cost: Стоимость
+Base Cost: Базовая стоимость
+Services Cost: Цена услуги
+Additional Cost: Дополнительная стоимость
+Additional Cost Comment: Комментарий дополнительной стоимости
+Discount Frequency: Скидка на частоту
+Discount Promocode: Скидка за промокод
+Paid: Итоговая стоимость
+

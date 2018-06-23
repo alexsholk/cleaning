@@ -197,4 +197,19 @@ class Param
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return (string)$this->title;
+    }
+
+    public function getCategoryName(): ?string
+    {
+        return self::$groups[$this->category];
+    }
+
+    public function getTypeName(): ?string
+    {
+        return self::$types[$this->type];
+    }
 }
