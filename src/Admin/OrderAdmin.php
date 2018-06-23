@@ -58,9 +58,23 @@ class OrderAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
+        $translatedChoiceItems = array_map(
+            function ($item) {
+                return $this->trans($item);
+            },
+            Order::$statuses
+        );
+
         $listMapper
             ->addIdentifier('name')
-            ->add('status',TextType::class, ['template' => 'sonata\CRUD\status_list_field.html.twig'])
+            ->add(
+                'status',
+                'choice',
+                [
+                    'editable' => true,
+                    'choices' => $translatedChoiceItems,
+                ]
+            )
             ->add('city')
             ->add(
                 'phone',

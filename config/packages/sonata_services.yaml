@@ -40,3 +40,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Promocode, group: Admin }
         public: true
+
+    admin.call_request:
+        class: App\Admin\CallRequestAdmin
+        arguments: [~, App\Entity\CallRequest, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: CallRequest, group: Admin }
+        public: true

@@ -428,7 +428,7 @@ class Order
 
     public function setStatus($status): self
     {
-        $this->status = $status;
+        $this->status = (int)$status;
 
         return $this;
     }

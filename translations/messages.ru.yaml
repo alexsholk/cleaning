@@ -59,3 +59,11 @@ Enabled: Активировать
 Promocode List: Список промокодов
 Promocode Create: Создать промокод
 Inventory: Инвентарь
+status.phoned: Совершен звонок
+status.not_available: Не доступен
+status.wrong_phone: Неправильный номер
+status.spam: Спам
+Call Request List: Список запросов на звонок
+CallRequest: Запросы на звонок
+Created At: Дата создания
+Ip: IP

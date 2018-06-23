@@ -140,4 +140,14 @@ class CallRequest
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return (string)$this->name;
+    }
+
+    public function getStatusName(): ?string
+    {
+        return self::$statuses[$this->status];
+    }
 }

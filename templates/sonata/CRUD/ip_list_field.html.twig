@@ -1,9 +1,9 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
 {% block field %}
-    {% if value is null %}
+    {% if object.ip is null %}
         -
     {% else %}
-        {{ object.getStatusName|trans }}
+        {{ object.ip.getShortAddress }}
     {% endif %}
 {% endblock %}
