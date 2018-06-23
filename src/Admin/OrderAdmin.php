@@ -4,6 +4,7 @@ namespace App\Admin;
 
 
 use App\Entity\Order;
+use App\Model\AreaModel;
 use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -13,6 +14,7 @@ use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Sonata\CoreBundle\Form\Type\DateTimeRangePickerType;
 use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -37,18 +39,62 @@ class OrderAdmin extends AbstractAdmin
         $formMapper
             ->tab('Order')
                 ->add('name', TextType::class)
-                ->add('status', ChoiceType::class, ['choices' => array_flip(Order::$statuses)])
+            ->add(
+                'phone',
+                PhoneNumberType::class
+            )
                 ->add(
-                    'phone',
-                    PhoneNumberType::class
+                    'status',
+                    ChoiceType::class,
+                    [
+                        'choices' => array_flip(Order::$statuses)
+                    ]
                 )
                 ->add('datetime', DateTimePickerType::class)
-                ->add('promocode',null )
-                ->add('items', null, ['by_reference' => false])
+                ->add(
+                    'items',
+                    null,
+                    [
+                        'by_reference' => false
+                    ]
+                )
+                ->add(
+                    'frequency',
+                    ChoiceType::class,
+                    [
+                        'choices' => array_flip(Order::$frequencies)
+                    ]
+                )
+                ->add(
+                    'cleaners',
+                    null,
+                    [
+                        'by_reference' => false
+                    ]
+                )
                 ->add('comment', TextareaType::class, ['required' => false])
+                ->end()
+                ->with('Cost')
+                    ->add('baseCost', NumberType::class)
+                    ->add('servicesCost', NumberType::class, ['required' => false])
+                    ->add('additionalCost', NumberType::class, ['required' => false])
+                    ->add('additionalCostComment', TextareaType::class, ['required' => false])
+                    ->add('discountFrequency', NumberType::class, ['required' => false])
+                    ->add('promocode')
+                    ->add('discountPromocode', NumberType::class, ['required' => false])
+                    ->add('discount', NumberType::class, ['required' => false])
+                    ->add('paid', NumberType::class)
                 ->end()
                 ->with('Address')
                     ->add('city')
+                    ->add(
+                        'area',
+                        ChoiceType::class,
+                        [
+                            'choices' => array_flip(AreaModel::getAll()),
+                            'required' => false,
+                        ]
+                    )
                     ->add('street')
                     ->add('home')
                     ->add('building')
