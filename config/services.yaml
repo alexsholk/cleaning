@@ -3,6 +3,8 @@
 parameters:
     locale: 'ru'
     mailer_user: admin@example.com
+    sms_user: '%env(resolve:SMS_USER)%'
+    sms_password: '%env(resolve:SMS_PASSWORD)%'
     uploads_dir: '%kernel.project_dir%/public/uploads'
     uploads_url: '/uploads'
 

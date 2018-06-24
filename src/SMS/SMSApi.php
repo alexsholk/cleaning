@@ -6,6 +6,9 @@ use GuzzleHttp\Client;
 
 class SMSApi
 {
+    const API_URL = 'https://userarea.sms-assistent.by/api/v1';
+    const DEFAULT_SENDER = 'TEST-assist';
+
     const ERROR_INSUFFICIENT_FUNDS       = -1;
     const ERROR_AUTHENTICATION           = -2;
     const ERROR_MISSING_TEXT             = -3;
@@ -56,12 +59,80 @@ class SMSApi
 
     protected $login;
     protected $password;
+    protected $client;
 
     public function __construct(string $login, string $password)
     {
         $this->login = $login;
         $this->password = $password;
+        $this->client = new Client();
     }
 
+    /**
+     * @param $recipient
+     * @param $message
+     * @param $sender
+     * @param \DateTimeInterface|null $dateSend
+     * @param null $validityPeriod
+     * @return string
+     * @throws SMSApiException
+     */
+    public function send($recipient, $message, $sender = self::DEFAULT_SENDER, \DateTimeInterface $dateSend = null, $validityPeriod = null)
+    {
+        if (!is_null($dateSend)) {
+            $dateSend = $dateSend->format('YmdHi');
+        }
 
+        return $this->callUrl('/send_sms/plain', [
+            'recipient' => $recipient,
+            'message' => $message,
+            'sender' => $sender,
+            'date_send' => $dateSend,
+            'validity_period' => $validityPeriod,
+        ]);
+    }
+
+    /**
+     * @param $messageId
+     * @return string
+     * @throws SMSApiException
+     */
+    public function getStatus($messageId)
+    {
+        return $this->callUrl('/statuses/plain', ['id' => $messageId]);
+    }
+
+    /**
+     * @return string
+     * @throws SMSApiException
+     */
+    public function getCredits()
+    {
+        return $this->callUrl('/credits/plain');
+    }
+
+    /**
+     * @param $url
+     * @param array $data
+     * @return string
+     * @throws SMSApiException
+     */
+    protected function callUrl($url, $data = [])
+    {
+        $data += [
+            'user' => $this->login,
+            'password' => $this->password,
+        ];
+
+        $url = self::API_URL . $url . '?' . http_build_query($data);
+
+        $response = $this->client->get($url);
+        $content = $response->getBody()->getContents();
+        if ($content < 0) {
+            $message = self::$errorMessages[$content] ?? 'Unknown error';
+            throw new SMSApiException($message, $content);
+        }
+
+        return $content;
+    }
 }
