@@ -44,3 +44,14 @@ services:
     App\Twig\Pluralize:
         public: true
         tags: ['twig.extension']
+
+    App\Event\OrderCreatedListener:
+        tags:
+            - { name: kernel.event_listener, method: onOrderCreated, event: order.created }
+
+    App\SMS\SMSApi:
+        public: true
+        arguments:
+            - '%sms_user%'
+            - '%sms_password%'
+

@@ -20,7 +20,7 @@ class AjaxController extends Controller
     /**
      * Запрос звонка (AJAX)
      *
-     * @Route("/call-request", name="call_request", condition="request.isXmlHttpRequest()")
+     * @Route("/call-request", name="call_request")
      */
     public function callRequest(Request $request)
     {
@@ -62,7 +62,7 @@ class AjaxController extends Controller
     /**
      * Добавление отзыва (AJAX)
      *
-     * @Route("/add-review", name="add_review", condition="request.isXmlHttpRequest()")
+     * @Route("/add-review", name="add_review")
      */
     public function addReview(Request $request)
     {
@@ -103,7 +103,7 @@ class AjaxController extends Controller
     /**
      * Поиск улиц для автозаполнения
      *
-     * @Route("/get-streets", name="get_streets", condition="request.isXmlHttpRequest()")
+     * @Route("/get-streets", name="get_streets")
      */
     public function getStreets(Request $request)
     {
@@ -123,7 +123,7 @@ class AjaxController extends Controller
     /**
      * Проверка промокода (AJAX)
      *
-     * @Route("/check-promocode", name="check_promocode", condition="request.isXmlHttpRequest()")
+     * @Route("/check-promocode", name="check_promocode")
      */
     public function checkPromocode(Request $request)
     {
@@ -192,7 +192,7 @@ class AjaxController extends Controller
     /**
      * Очистка промокода (AJAX)
      *
-     * @Route("/clear-promocode", name="clear_promocode", condition="request.isXmlHttpRequest()")
+     * @Route("/clear-promocode", name="clear_promocode")
      */
     public function clearPromocode(Request $request)
     {

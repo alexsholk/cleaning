@@ -92,6 +92,20 @@ class ParamFixtures extends Fixture
             ->setType(Param::TYPE_BOOL)
             ->setValue(true);
 
+        $params[] = (new Param())
+            ->setCategory(Param::CATEGORY_SITE_SETTINGS)
+            ->setTitle('Телефон для СМС-уведомлений')
+            ->setCode('SMS_NOTIFICATION_PHONE')
+            ->setType(Param::TYPE_PHONE)
+            ->setValue(null);
+
+        $params[] = (new Param())
+            ->setCategory(Param::CATEGORY_SITE_SETTINGS)
+            ->setTitle('СМС-уведомление о создании заказа')
+            ->setCode('ORDER_CREATED_SMS_NOTIFICATION')
+            ->setType(Param::TYPE_BOOL)
+            ->setValue(true);
+
         /** Текстовые блоки */
 
         $params[] = (new Param())

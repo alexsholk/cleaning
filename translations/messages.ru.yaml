@@ -41,6 +41,7 @@ type.date: дата
 type.time: время
 type.datetime: дата и время
 type.image_url: URL изображения
+type.bool: да/нет
 group.text_blocks: текстовые блоки
 group.site_settings: настройки сайта
 group.messages: сообщения

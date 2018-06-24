@@ -162,7 +162,7 @@ class OrderAdmin extends AbstractAdmin
                     'choices' => $translatedChoiceItems,
                 ]
             )
-            ->add('city')
+            ->add('address')
             ->add(
                 'phone',
                 PhoneNumberType::class,

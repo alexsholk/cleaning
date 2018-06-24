@@ -18,7 +18,7 @@ class ParamAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('title')
-            ->add('code', TextType::class)
+            ->add('code', TextType::class, ['disabled' => true])
             ->add('value', TextareaType::class)
             ->add('category', ChoiceType::class, ['choices' => array_flip(Param::$groups)])
             ->add('type', ChoiceType::class, ['choices' => array_flip(Param::$types)]);

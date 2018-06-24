@@ -7,6 +7,7 @@ use App\Entity\Page;
 use App\Entity\Param;
 use App\Entity\Promocode;
 use App\Entity\Service;
+use App\Event\OrderCreatedEvent;
 use App\Form\OrderForm1;
 use App\Form\OrderForm2;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -244,6 +245,10 @@ class DefaultController extends Controller
 
         $em->persist($order);
         $em->flush();
+
+        // Событие создания заказа через сайт
+        $event = new OrderCreatedEvent($order);
+        $this->get('event_dispatcher')->dispatch(OrderCreatedEvent::NAME, $event);
 
         return $order;
     }

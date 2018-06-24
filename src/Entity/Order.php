@@ -284,6 +284,17 @@ class Order
         $this->payments = new ArrayCollection();
     }
 
+    public function getAddress()
+    {
+        $address = $this->city . ', ' . $this->street . ' ' . $this->home;
+        if ($this->building) {
+            $address .= '-' . $this->building;
+        }
+        $address .= ', ' . $this->flat;
+
+        return $address;
+    }
+
     public function getId()
     {
         return $this->id;
@@ -645,7 +656,7 @@ class Order
         if ($this->payments->contains($payment)) {
             $this->payments->removeElement($payment);
             // set the owning side to null (unless already changed)
-            if ($payment->setOrder() === $this) {
+            if ($payment->getOrder() === $this) {
                 $payment->setOrder(null);
             }
         }
