@@ -178,7 +178,7 @@ TEXT;
             if ($html) {
                 $sentence = '<p>' . $sentence . '</p>';
             }
-            $text .= $sentence;
+            $text .= $sentence . "\n";
         }
 
         return $text;
