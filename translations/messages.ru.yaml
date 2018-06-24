@@ -46,8 +46,8 @@ group.text_blocks: текстовые блоки
 group.site_settings: настройки сайта
 group.messages: сообщения
 group.order_settings: настройки заказов
-Cleaner List: Список уборщиков
-Cleaner: Уборщики
+Cleaner List: Список клинеров
+Cleaner: Клинеры
 Additional Phone: Дополнительный телефон
 Orders: Заказы
 Inventory Movements: Движение инвентаря
@@ -111,7 +111,7 @@ Short Code: Короткий код
 Order Create: Создать заказ
 Page Create: Создать страницу
 Param Create: Создать параметр
-Cleaner Create: Создать уборщица
+Cleaner Create: Создать клинера
 Inventory Create: Создать инвентарь
 Inventory Movement Create: Создать движение инвентаря
 Payment Create: Движение средств
