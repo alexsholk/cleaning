@@ -3,6 +3,7 @@
 namespace App\Admin;
 
 
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -18,7 +19,7 @@ class PageAdmin extends AbstractAdmin
             ->add('siteTitle')
             ->add('metaDescription', TextareaType::class)
             ->add('metaKeywords')
-            ->add('content', TextareaType::class, ['attr' => ['cols' => '5', 'rows' => '10']])
+            ->add('content', CKEditorType::class)
             ->add('visible');
     }
 
