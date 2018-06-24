@@ -3,64 +3,35 @@
 namespace App\Admin;
 
 
-use App\Entity\CallRequest;
-use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Sonata\CoreBundle\Form\Type\DateTimeRangePickerType;
 use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Darsyn\IP\IP;
 
-class CallRequestAdmin extends AbstractAdmin
+class ReviewAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $ip = $this->getSubject()->getIp() ? $this->getSubject()->getIp()->getShortAddress() : '';
         $formMapper
             ->add('name')
-            ->add('status', ChoiceType::class, ['choices' => array_flip(CallRequest::$statuses)])
-            ->add('phone', PhoneNumberType::class)
+            ->add('text', TextareaType::class)
+            ->add('visible')
+            ->add('weight')
             ->add('ip', null, ['disabled' => true, 'data' => $ip])
             ->add('createdAt', DateTimePickerType::class, ['disabled' => true]);
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $translatedChoiceItems = array_map(
-            function ($item) {
-                return $this->trans($item);
-            },
-            CallRequest::$statuses
-        );
-
         $listMapper
             ->addIdentifier('name')
-            ->add(
-                'status',
-                'choice',
-                [
-                    'editable' => true,
-                    'choices' => $translatedChoiceItems,
-                ]
-            )
-            ->add(
-                'phone',
-                PhoneNumberType::class,
-                [
-                    'template' => 'sonata\CRUD\phone_list_field.html.twig'
-                ]
-            )
-            ->add(
-                'ip',
-                null,
-                [
-                    'template' => 'sonata\CRUD\ip_list_field.html.twig'
-                ]
-                )
+            ->add('visible')
             ->add('createdAt', null, ['format' => 'd-m-Y H:i'])
             ->add(
                 '_action',
@@ -78,15 +49,7 @@ class CallRequestAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('name')
-            ->add(
-                'status',
-                'doctrine_orm_string',
-                [],
-                ChoiceType::class,
-                [
-                    'choices' => array_flip(CallRequest::$statuses)
-                ]
-            )
+            ->add('visible')
             ->add(
                 'createdAt',
                 DateTimeRangeFilter::class,
@@ -106,9 +69,15 @@ class CallRequestAdmin extends AbstractAdmin
             );
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    public function preUpdate($object)
     {
-        parent::configureRoutes($collection);
-        $collection->remove('create');
+        parent::preUpdate($object);
+        $object->setIp(new Ip($this->getRequest()->getClientIp()));
+    }
+
+    public function prePersist($object)
+    {
+        parent::prePersist($object);
+        $this->preUpdate($object);
     }
 }
