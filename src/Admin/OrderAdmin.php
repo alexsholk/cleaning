@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\CoreBundle\Form\Type\CollectionType;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Sonata\CoreBundle\Form\Type\DateTimeRangePickerType;
 use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
@@ -39,10 +40,10 @@ class OrderAdmin extends AbstractAdmin
         $formMapper
             ->tab('Order')
                 ->add('name', TextType::class)
-            ->add(
-                'phone',
-                PhoneNumberType::class
-            )
+                ->add(
+                    'phone',
+                    PhoneNumberType::class
+                )
                 ->add(
                     'status',
                     ChoiceType::class,
@@ -51,28 +52,34 @@ class OrderAdmin extends AbstractAdmin
                     ]
                 )
                 ->add('datetime', DateTimePickerType::class)
-                ->add(
-                    'items',
-                    null,
-                    [
-                        'by_reference' => false
-                    ]
-                )
-                ->add(
-                    'frequency',
-                    ChoiceType::class,
-                    [
-                        'choices' => array_flip(Order::$frequencies)
-                    ]
-                )
-                ->add(
-                    'cleaners',
-                    null,
-                    [
-                        'by_reference' => false
-                    ]
-                )
                 ->add('comment', TextareaType::class, ['required' => false])
+                ->end()
+                ->with('Service')
+                    ->add(
+                        'items',
+                        CollectionType::class,
+                        [
+                            'by_reference' => false
+                        ],
+                        [
+                            'edit' => 'inline',
+                            'inline' => 'table',
+                        ]
+                    )
+                    ->add(
+                        'frequency',
+                        ChoiceType::class,
+                        [
+                            'choices' => array_flip(Order::$frequencies)
+                        ]
+                    )
+                    ->add(
+                        'cleaners',
+                        null,
+                        [
+                            'by_reference' => false
+                        ]
+                    )
                 ->end()
                 ->with('Cost')
                     ->add('baseCost', NumberType::class)

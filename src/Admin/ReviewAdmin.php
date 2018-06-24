@@ -11,6 +11,7 @@ use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Sonata\CoreBundle\Form\Type\DateTimeRangePickerType;
 use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Darsyn\IP\IP;
 
 class ReviewAdmin extends AbstractAdmin
 {
@@ -23,7 +24,7 @@ class ReviewAdmin extends AbstractAdmin
             ->add('visible')
             ->add('weight')
             ->add('ip', null, ['disabled' => true, 'data' => $ip])
-            ->add('createdAt', DateTimePickerType::class);
+            ->add('createdAt', DateTimePickerType::class, ['disabled' => true]);
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -68,4 +69,15 @@ class ReviewAdmin extends AbstractAdmin
             );
     }
 
+    public function preUpdate($object)
+    {
+        parent::preUpdate($object);
+        $object->setIp(new Ip($this->getRequest()->getClientIp()));
+    }
+
+    public function prePersist($object)
+    {
+        parent::prePersist($object);
+        $this->preUpdate($object);
+    }
 }

@@ -111,5 +111,4 @@ class CallRequestAdmin extends AbstractAdmin
         parent::configureRoutes($collection);
         $collection->remove('create');
     }
-
 }
