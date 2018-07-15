@@ -52,7 +52,7 @@ class ParamFixtures extends Fixture
             ->setTitle('Телефон')
             ->setCode('PHONE')
             ->setType(Param::TYPE_PHONE)
-            ->setValue('+375 29 607 69 39');
+            ->setValue('+375 29 196 28 29');
 
         // Социальные сети
         $params[] = (new Param())
@@ -82,7 +82,7 @@ class ParamFixtures extends Fixture
             ->setTitle('Слоган')
             ->setCode('SITE_SLOGAN')
             ->setType(Param::TYPE_STRING)
-            ->setValue('Мы работаем чтобы Вы отдыхали!');
+            ->setValue('Мы работаем, чтобы Вы отдыхали!');
 
         // Прочие настройки
         $params[] = (new Param())
