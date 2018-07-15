@@ -115,12 +115,12 @@ class ParamFixtures extends Fixture
             ->setType(Param::TYPE_HTML)
             ->setValue(<<<HTML
 <ul>
-    <li><a href="/page/about">Поддерживающая уборка</a></li>
-    <li><a href="/page/about">Уборка после ремонта</a></li>
-    <li><a href="/page/about">Мытье окон</a></li>
-    <li><a href="/page/about">Мытье бытовой техники</a></li>
-    <li><a href="/page/about">Глажка белья</a></li>
-    <li><a href="/page/about" class="grey">Что мы не делаем</a></li>
+    <li><a href="/page/maintenance-cleaning">Поддерживающая уборка</a></li>
+    <li><a href="/page/spring-cleaning">Генеральная уборка</a></li>
+    <li><a href="/page/cleaning-after-repair">Уборка после строительства и ремонта</a></li>
+    <li><a href="/page/washing-windows">Мытье окон</a></li>
+    <li><a href="/page/additional-services">Дополнительные услуги</a></li>
+    <li><a href="/page/what-we-do-not-do" class="grey">Что мы не делаем</a></li>
 </ul>            
 HTML
             );
@@ -152,9 +152,9 @@ HTML
             ->setType(Param::TYPE_HTML)
             ->setValue(<<<HTML
 <ul>
-    <li><a href="/page/about">Вопросы и ответы</a></li>
-    <li><a href="/page/about">Хотите работать у нас?</a></li>
-    <li><a href="/page/about">Пользовательское соглашение</a></li>
+    <li><a href="/page/faq">Вопросы и ответы</a></li>
+    <li><a href="/page/vacancies">Хотите работать у нас?</a></li>
+    <li><a href="/page/user-agreement">Пользовательское соглашение</a></li>
     <li><a href="/page/about">О сервисе</a></li>
 </ul>
 HTML
